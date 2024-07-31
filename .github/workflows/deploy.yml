@@ -1,11 +1,10 @@
-name: Deploy to Vercel
+name: Build & Deploy to Vercel
 
-on:
-  push:
-    branches:
-    - main
-    - release/*
-    - feature/*
+on: 
+  workflow_run:
+    workflows: ["Run Tests"]
+    types:
+      - completed
 
 env:
   VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
@@ -15,6 +14,7 @@ jobs:
   build_website_files:
     name: Build Files
     runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
 
     steps:
       - uses: actions/checkout@v4
