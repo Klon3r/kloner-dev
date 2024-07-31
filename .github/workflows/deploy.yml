@@ -1,0 +1,42 @@
+name: Deploy to Vercel
+
+on:
+  push:
+    branches:
+    - main
+    - release/*
+    - feature/*
+
+env:
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+  VERCEL_TEAM_ID: ${{ secrets.VERCEL_TEAM_ID }}
+
+jobs:
+  build_website_files:
+    name: Build Files
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+          
+      - name: Install Vercel
+        run: npm install vercel
+
+      - name: Install Depends
+        run: npm ci
+
+      - name: Build Site
+        run: npm run build
+
+      - name: Get latest vercel config
+        run: npx vercel pull --token ${{ secrets.VERCEL_ID }}
+
+      - name: Build a vercel project
+        run: npx vercel build --token ${{ secrets.VERCEL_ID }}
+
+      - name: Deploy App
+        run: npx vercel --prebuilt --token ${{ secrets.VERCEL_ID }}
