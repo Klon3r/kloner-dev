@@ -33,10 +33,10 @@ jobs:
         run: npm run build
 
       - name: Get latest vercel config
-        run: npx vercel pull --token ${{ secrets.VERCEL_ID }}
+        run: npx vercel pull --token ${{ secrets.VERCEL_TOKEN }}
 
       - name: Build a vercel project
-        run: npx vercel build --token ${{ secrets.VERCEL_ID }}
+        run: npx vercel build --token ${{ secrets.VERCEL_TOKEN }}
 
       - name: Deploy App
-        run: npx vercel --prebuilt --token ${{ secrets.VERCEL_ID }}
+        run: npx vercel --prebuilt --token ${{ secrets.VERCEL_TOKEN }}
