@@ -1,13 +1,11 @@
+import Image from "../assets/photo-me-greyscale.png";
+
 function Homepage() {
   return (
     <>
       <div id="main-div">
         <div id="left-div">
-          <img
-            id="photo-me"
-            alt="A photo of Keiran Bunyan"
-            src="../src/assets/photo-me-greyscale.png"
-          ></img>
+          <img id="photo-me" alt="A photo of Keiran Bunyan" src={Image}></img>
         </div>
         <div id="center-div">
           <div id="title"> About Me</div>
