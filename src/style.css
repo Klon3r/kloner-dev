@@ -122,6 +122,10 @@ body {
   }
 }
 
+#typewriter {
+  white-space: preserve-breaks;
+}
+
 /* -------------
     MOBILE
 ---------------*/

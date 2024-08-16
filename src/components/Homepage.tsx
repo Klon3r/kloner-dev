@@ -1,10 +1,23 @@
 import React, { useEffect, useMemo } from "react";
-import { Terminal } from "../Terminal";
-import { useTerminal } from "../Terminal/hooks";
+import { Terminal } from "./terminal";
+import { useTerminal } from "./terminal/hooks";
+import Typewriter from "./Typewriter";
 
 function Homepage() {
   const { history, pushToHistory, setTerminalRef, resetTerminal } =
     useTerminal();
+
+  function headerInfo() {
+    pushToHistory(
+      <>
+        <div style={{ fontSize: 20 }}>
+          <strong>kloner.dev</strong>
+        </div>
+        <div>To get started please enter to following commands</div>
+        <div>Commands: about-me</div>
+      </>
+    );
+  }
 
   useEffect(() => {
     resetTerminal();
@@ -14,23 +27,37 @@ function Homepage() {
         <div style={{ fontSize: 20 }}>
           <strong>kloner.dev</strong>
         </div>
-        <div>Welcome to my website, it is kinda a terminal</div>
-        <br />
         <div>To get started please enter to following commands</div>
-        <div>Commands: about-me</div>
+        <div>Commands: about-me, clear</div>
       </>
     );
   }, []);
 
   const commands = useMemo(
     () => ({
-      start: async () => {
+      "about-me": async () => {
         await pushToHistory(
           <>
-            <div>
-              <strong>Starting</strong> the server...{" "}
-              <span style={{ color: "green" }}>Done</span>
-            </div>
+            <Typewriter
+              text={`
+              Hello, my name is Keiran Bunyan. I am a passionate web developer
+              who loves programming and problem-solving. I thrive on the
+              challenge of turning problems into elegant, functional
+              solutions.
+
+              I have recently graduated with a Bachelor's degree in 'Computer
+              Science'. My academic journey provided me with a comprehensive
+              foundation of software development, data structures & algorithms.
+
+              I am committed to continuously enhancing my knowledge and
+              deepening my interest in web technologies.
+
+              My goal is to stay at the forefront of industry trends and
+              continually improve my skills to create innovative and effective
+              web solutions.
+            `}
+              speed={20} // Adjust the speed as necessary
+            />
           </>
         );
       },
@@ -46,6 +73,10 @@ function Homepage() {
             </div>
           </>
         );
+      },
+      clear: async () => {
+        resetTerminal();
+        headerInfo();
       },
     }),
     [pushToHistory]
