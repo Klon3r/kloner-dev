@@ -1,234 +1,111 @@
 :root {
-  --grid-color: #25242459;
-  --background-color: #67527ee0;
-  --card-background-color: #333333;
-  --text-color: #dddddd;
+  --background-color: #252525;
+  --title-color: #f7f3f2;
+  --border-radius: 10px;
+  --red-button: #ff6058;
+  --yellow-button: #fdbb2c;
+  --green-button: #26c73f;
+  --button-size: 15px;
+  --title-text-color: #4b4848;
 }
 
-body {
+#terminal-main-div {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 50vw;
+  border-radius: var(--border-radius);
+  box-shadow: 8px 8px 8px var(--background-color);
+}
+/*-------------- 
+      TITLE 
+----------------*/
+#terminal-title-div {
+  background-color: var(--title-color);
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#title-button-div {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+#title-red-button-div {
+  background-color: var(--red-button);
+  border-radius: 50%;
+  height: var(--button-size);
+  width: var(--button-size);
+}
+
+#title-yellow-button-div {
+  background-color: var(--yellow-button);
+  border-radius: 50%;
+  height: var(--button-size);
+  width: var(--button-size);
+  margin-left: 10px;
+}
+
+#title-green-button-div {
+  background-color: var(--green-button);
+  border-radius: 50%;
+  height: var(--button-size);
+  width: var(--button-size);
+  margin-left: 10px;
+}
+
+#title-div {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#title-text {
+  color: var(--title-text-color);
+}
+
+#terminal-body-div {
   background-color: var(--background-color);
-  background-size: 40px 40px;
-  background-image: linear-gradient(
-      to right,
-      var(--grid-color) 1px,
-      transparent 1px
-    ),
-    linear-gradient(to bottom, var(--grid-color) 1px, transparent 1px);
+  height: 60vh;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
 }
 
-#main-div {
-  padding-top: 50px;
+#terminal-body,
+#command-div {
+  color: #f0f0f0;
+  padding: 5px;
+  font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Courier New", Courier,
+    monospace;
 }
 
-/* -------------
-    DESKTOPS 
----------------*/
-@media only screen and (min-width: 700px) {
-  #main-div {
-    display: flex;
-    flex-direction: row;
-    gap: 10px;
-    flex-grow: 2;
-    /* border: 1px solid black; */
-    justify-content: center;
-    min-height: 20vh;
-    /* max-width: 30vw; */
-    margin-top: 55px;
-    max-width: 50vw;
-    margin: auto;
-    align-items: start;
-  }
-
-  #left-div,
-  #center-div,
-  #right-div {
-    border: 1px solid var(--grid-color);
-    background-color: var(--card-background-color);
-    box-shadow: 1px 1px 1px;
-    border-radius: 10px;
-  }
-
-  #left-div:hover,
-  #center-div:hover,
-  #right-div:hover {
-    transform: scale(1.01);
-    transition: 1s;
-  }
-
-  #left-div:hover,
-  #center-div:hover,
-  #right-div:hover {
-    border: 1px solid white;
-    box-shadow: 0px 0px 0px;
-  }
-
-  #left-div {
-    min-width: 250px;
-    max-width: 20vw;
-    /* min-height: 30vh; */
-  }
-
-  #center-div {
-    min-width: 50vw;
-  }
-
-  #right-div {
-    min-width: 200px;
-    min-height: 300px;
-  }
-
-  #photo-me {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-  }
-
-  #content,
-  #title {
-    color: var(--text-color);
-  }
-
-  p {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  #title {
-    padding-top: 5px;
-    padding-left: 10px;
-    text-decoration: underline;
-    text-underline-offset: 8px;
-    font-weight: 600;
-  }
-
-  li {
-    list-style: none;
-  }
-
-  ul {
-    padding-left: 20px;
-    padding-top: 15px;
-    display: flex;
-    flex-direction: column;
-  }
-
-  #link-ul {
-    padding-top: 0px;
-  }
-
-  a {
-    color: var(--text-color);
-    text-decoration: none;
-  }
+input {
+  flex: 1;
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.42;
+  font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Courier New", Courier;
+  overflow-y: auto;
+  height: 500px;
 }
 
-#typewriter {
-  white-space: preserve-breaks;
+#terminal-input-div {
+  display: flex;
+  /* padding: 10px; */
+  height: 20px;
+  align-items: center;
+  margin-left: 20px;
 }
 
-/* -------------
-    MOBILE
----------------*/
-@media only screen and (max-width: 699px) {
-  #main-div {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    flex-grow: 2;
-    /* border: 1px solid black; */
-    justify-content: center;
-    min-height: 20vh;
-    /* max-width: 30vw; */
-    margin-top: 55px;
-    max-width: 50vw;
-    margin: auto;
-    align-items: center;
-  }
-
-  #second-div {
-    display: flex;
-    gap: 10px;
-  }
-
-  #left-div,
-  #center-div,
-  #right-div {
-    border: 1px solid var(--grid-color);
-    background-color: var(--card-background-color);
-    box-shadow: 1px 1px 1px;
-    border-radius: 10px;
-  }
-
-  #left-div:hover,
-  #center-div:hover,
-  #right-div:hover {
-    transform: scale(1.01);
-    transition: 1s;
-  }
-
-  #left-div:hover,
-  #center-div:hover,
-  #right-div:hover {
-    border: 1px solid white;
-    box-shadow: 0px 0px 0px;
-  }
-
-  #left-div {
-    min-width: 200px;
-    max-width: 20vw;
-    /* min-height: 30vh; */
-  }
-
-  #center-div {
-    min-width: 80vw;
-  }
-
-  #right-div {
-    min-width: 200px;
-    min-height: 300px;
-    display: flex;
-  }
-
-  #photo-me {
-    width: 100%;
-    height: 100%;
-    border-radius: 10px;
-  }
-
-  #content,
-  #title {
-    color: var(--text-color);
-  }
-
-  p {
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-
-  #title {
-    padding-top: 5px;
-    padding-left: 10px;
-    text-decoration: underline;
-    text-underline-offset: 8px;
-    font-weight: 600;
-  }
-
-  li {
-    list-style: none;
-  }
-
-  ul {
-    padding-left: 20px;
-    padding-top: 15px;
-  }
-
-  a {
-    color: var(--text-color);
-    text-decoration: none;
-  }
-
-  #link-ul {
-    display: flex;
-    flex-direction: column;
-  }
+#prompt {
+  color: #f0f0f0;
 }
