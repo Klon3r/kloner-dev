@@ -109,3 +109,9 @@ input {
 #prompt {
   color: #f0f0f0;
 }
+
+/* Terminal.css */
+.terminal-body {
+  white-space: pre-wrap; /* Preserve whitespace and line breaks */
+  font-family: monospace; /* Optional: use a monospace font for terminal-like appearance */
+}

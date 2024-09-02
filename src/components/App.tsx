@@ -3,8 +3,7 @@ import Terminal from "./Terminal";
 
 function App() {
   const [text, setText] = useState("");
-  const introText: string =
-    "Hello, my name is Keiran Bunyan. I am a passionate web developer who loves programming and problem-solving. I thrive on the challenge of turning problems into elegant, functional solutions";
+  const introText: string = "Welcome to kloner.dev";
 
   const updateText = () => {
     for (let i = 0; i < introText.length; i++) {
