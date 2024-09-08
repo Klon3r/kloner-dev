@@ -95,7 +95,8 @@ input {
   line-height: 1.42;
   font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Courier New", Courier;
   overflow-y: auto;
-  height: 500px;
+  height: 50px;
+  /* border: 1px solid white; */
 }
 
 #terminal-input-div {
@@ -111,7 +112,14 @@ input {
 }
 
 /* Terminal.css */
+#terminal-body,
 .terminal-body {
-  white-space: pre-wrap; /* Preserve whitespace and line breaks */
-  font-family: monospace; /* Optional: use a monospace font for terminal-like appearance */
+  white-space: pre-wrap;
+}
+
+#terminal-body {
+  max-height: 200px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  user-select: text;
 }
