@@ -8,18 +8,29 @@ function Terminal() {
   const shouldAutoScroll = useRef(true);
   const [isComplete, setIsComplete] = useState(false);
 
+  /**
+   * Once slow typing is complete, make it so you can autoscroll
+   */
   const handleTypingComplete = () => {
     setIsComplete(true);
     shouldAutoScroll.current = false;
   };
 
-  // Custom hook usage
+  // Custom hook
   const lines = useSlowType(output, 3, handleTypingComplete);
 
+  /**
+   * Set the command to the value of the input
+   * @param e The value of the input
+   */
   function changeInput(e: string) {
     setCommandInput(e);
   }
 
+  /**
+   * Check what key is pressed
+   * @param key The key that was pressed
+   */
   function checkKeyPress(key: string) {
     if (key === "Enter") {
       commandCheck(commandInput);
@@ -27,6 +38,10 @@ function Terminal() {
     }
   }
 
+  /**
+   * List of usable commands
+   * @param value The value that has been typed
+   */
   function commandCheck(value: string) {
     console.log("You typed", value);
     value = value.toLowerCase();
@@ -55,6 +70,9 @@ function Terminal() {
     }
   }
 
+  /**
+   * Reset the ability to scroll
+   */
   const resetScroll = () => {
     shouldAutoScroll.current = true;
     setIsComplete(false);
