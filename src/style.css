@@ -1,12 +1,16 @@
 :root {
   --background-color: #252525;
   --title-color: #f7f3f2;
-  --border-radius: 10px;
+  --border-radius: 1px;
   --red-button: #ff6058;
   --yellow-button: #fdbb2c;
   --green-button: #26c73f;
   --button-size: 15px;
   --title-text-color: #4b4848;
+}
+
+body {
+  background-color: #fae2ff;
 }
 
 #terminal-main-div {
@@ -16,6 +20,8 @@
   width: 50vw;
   border-radius: var(--border-radius);
   box-shadow: 8px 8px 8px var(--background-color);
+  min-height: 300px;
+  max-height: 350px;
 }
 /*-------------- 
       TITLE 
@@ -67,6 +73,7 @@
 
 #title-text {
   color: var(--title-text-color);
+  font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Courier New", Courier;
 }
 
 #terminal-body-div {
@@ -121,4 +128,32 @@ input {
   overflow-y: auto;
   scroll-behavior: smooth;
   user-select: text;
+}
+
+/* INFO */
+#info-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-bottom: 1em;
+}
+
+#photo-of-me,
+img {
+  border: 1px solid black;
+  box-shadow: 2px 2px 2px var(--background-color);
+  max-width: 100px;
+  width: 100px;
+  margin-right: 2em;
+}
+
+#github-logo {
+  cursor: pointer;
+  background-color: white;
+}
+
+#github-logo:hover {
+  background-color: #252525;
 }

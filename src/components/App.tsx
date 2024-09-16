@@ -1,9 +1,14 @@
 import { useState, useEffect } from "react";
 import Terminal from "./Terminal";
+import photo from "../assets/photo-me-cropped.png";
+import githubBlack from "../assets/github-logo-black.png";
+import githubWhite from "../assets/github-logo-white.png";
 
 function App() {
   const [text, setText] = useState("");
-  const introText: string = "Welcome to kloner.dev";
+  const [githubLogo, setGithubLogo] = useState(githubBlack);
+  const introText: string =
+    "Hello, My name is Keiran Bunyan.\nWelcome to kloner.dev";
 
   const updateText = () => {
     for (let i = 0; i < introText.length; i++) {
@@ -17,6 +22,19 @@ function App() {
 
   return (
     <>
+      <div id="info-div">
+        <div id="photo-div">
+          <img id="photo-of-me" src={photo} alt="Photo of me"></img>
+        </div>
+        <img
+          id="github-logo"
+          src={githubLogo}
+          onMouseOver={() => setGithubLogo(githubWhite)}
+          onMouseOut={() => setGithubLogo(githubBlack)}
+          onClick={() => window.open("https://www.github.com/Klon3r")}
+          alt="GitHub Icon"
+        ></img>
+      </div>
       <div id="terminal-main-div">
         <div id="terminal-title-div">
           <div id="title-button-div">
