@@ -27,7 +27,7 @@ body {
 /* Styling for MOBILE */
 @media (max-width: 600px) {
   #terminal-main-div {
-    width: 95vw;
+    width: 90vw;
   }
 }
 
