@@ -97,7 +97,7 @@ function Terminal() {
         commands
       </div>
 
-      <div id="terminal-body" ref={containerRef}>
+      <div id="terminal-body" ref={containerRef} title="terminal-body">
         {lines.map((line, index) => (
           <div key={index} style={{ marginBottom: "1em", paddingLeft: "1em" }}>
             {line}
@@ -108,6 +108,7 @@ function Terminal() {
       <div id="terminal-input-div">
         <p id="prompt">{"> "} </p>
         <input
+          title="command-input"
           onChange={(e) => changeInput(e.target.value)}
           value={commandInput}
           onKeyDown={(e) => checkKeyPress(e.key)}

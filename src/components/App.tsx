@@ -24,7 +24,12 @@ function App() {
     <>
       <div id="info-div">
         <div id="photo-div">
-          <img id="photo-of-me" src={photo} alt="Photo of me"></img>
+          <img
+            id="photo-of-me"
+            src={photo}
+            alt="Photo of me"
+            title="photo-of-me"
+          ></img>
         </div>
         <img
           id="github-logo"
@@ -32,7 +37,8 @@ function App() {
           onMouseOver={() => setGithubLogo(githubWhite)}
           onMouseOut={() => setGithubLogo(githubBlack)}
           onClick={() => window.open("https://www.github.com/Klon3r")}
-          alt="GitHub Icon"
+          alt="GitHub Logo"
+          title="github-logo"
         ></img>
       </div>
       <div id="terminal-main-div">
