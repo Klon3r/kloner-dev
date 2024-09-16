@@ -106,7 +106,12 @@ function Terminal() {
       </div>
 
       <div id="terminal-input-div">
-        <p id="prompt">{"> "} </p>
+        <p
+          id="prompt"
+          style={{ fontSize: 18, fontWeight: "bolder", color: "#90EE90" }}
+        >
+          {"> "}{" "}
+        </p>
         <input
           title="command-input"
           onChange={(e) => changeInput(e.target.value)}

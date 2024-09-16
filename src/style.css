@@ -120,6 +120,7 @@ input {
   height: 20px;
   align-items: center;
   margin-left: 20px;
+  font-size: 14px;
 }
 
 #prompt {
