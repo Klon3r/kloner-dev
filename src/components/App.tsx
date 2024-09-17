@@ -50,7 +50,7 @@ function App() {
           </div>
           <div></div>
           <div id="title-div">
-            <h3 id="title-text">Kloner.dev</h3>
+            <h3 id="title-text">kloner.dev</h3>
           </div>
           <div></div>
           <div></div>
