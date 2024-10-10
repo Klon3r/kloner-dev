@@ -1,6 +1,8 @@
 # kloner.dev
 
-My website
+My website that looks and operates like a terminal.
+
+[Link!](https://kloner.dev)
 
 - Github Actions
 - CI/CD
