@@ -1,0 +1,168 @@
+:root {
+  --background-color: #252525;
+  --title-color: #f7f3f2;
+  --border-radius: 1px;
+  --red-button: #ff6058;
+  --yellow-button: #fdbb2c;
+  --green-button: #26c73f;
+  --button-size: 15px;
+  --title-text-color: #4b4848;
+}
+
+body {
+  background-color: #fae2ff;
+}
+
+#terminal-main-div {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  width: 50vw;
+  border-radius: var(--border-radius);
+  box-shadow: 8px 8px 8px var(--background-color);
+  height: 350px;
+  max-height: 350px;
+}
+
+/* Styling for MOBILE */
+@media (max-width: 600px) {
+  #terminal-main-div {
+    width: 90vw;
+  }
+}
+
+/*-------------- 
+      TITLE 
+----------------*/
+#terminal-title-div {
+  background-color: var(--title-color);
+  border-top-right-radius: var(--border-radius);
+  border-top-left-radius: var(--border-radius);
+  height: 30px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+
+#title-button-div {
+  display: flex;
+  flex-direction: row;
+  margin-left: 10px;
+}
+
+#title-red-button-div {
+  background-color: var(--red-button);
+  border-radius: 50%;
+  height: var(--button-size);
+  width: var(--button-size);
+}
+
+#title-yellow-button-div {
+  background-color: var(--yellow-button);
+  border-radius: 50%;
+  height: var(--button-size);
+  width: var(--button-size);
+  margin-left: 10px;
+}
+
+#title-green-button-div {
+  background-color: var(--green-button);
+  border-radius: 50%;
+  height: var(--button-size);
+  width: var(--button-size);
+  margin-left: 10px;
+}
+
+#title-div {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+#title-text {
+  color: var(--title-text-color);
+  font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Courier New", Courier;
+}
+
+#terminal-body-div {
+  background-color: var(--background-color);
+  height: 60vh;
+  border-bottom-left-radius: var(--border-radius);
+  border-bottom-right-radius: var(--border-radius);
+}
+
+#terminal-body,
+#command-div {
+  color: #f0f0f0;
+  padding: 5px;
+  font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Courier New", Courier,
+    monospace;
+}
+
+input {
+  flex: 1;
+  width: 100%;
+  background-color: transparent;
+  color: white;
+  border: 0;
+  outline: none;
+  font-size: 14px;
+  line-height: 1.42;
+  font-family: "IBM Plex Mono", Consolas, Menlo, Monaco, "Courier New", Courier;
+  overflow-y: auto;
+  height: 50px;
+  /* border: 1px solid white; */
+}
+
+#terminal-input-div {
+  display: flex;
+  /* padding: 10px; */
+  height: 20px;
+  align-items: center;
+  margin-left: 20px;
+  font-size: 14px;
+}
+
+#prompt {
+  color: #f0f0f0;
+}
+
+#terminal-body,
+.terminal-body {
+  white-space: pre-wrap;
+}
+
+#terminal-body {
+  max-height: 200px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  user-select: text;
+}
+
+/* INFO */
+#info-div {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  padding-bottom: 1em;
+}
+
+#photo-of-me,
+img {
+  border: 1px solid black;
+  box-shadow: 2px 2px 2px var(--background-color);
+  max-width: 100px;
+  width: 100px;
+  margin-right: 2em;
+}
+
+#github-logo {
+  cursor: pointer;
+  background-color: white;
+}
+
+#github-logo:hover {
+  background-color: #252525;
+}
