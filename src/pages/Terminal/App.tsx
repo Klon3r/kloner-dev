@@ -1,13 +1,9 @@
 import { useState, useEffect } from "react";
 import Terminal from "./Terminal";
-import photo from "../../assets/photo-me-cropped.png";
-import githubBlack from "../../assets/github-logo-black.png";
-import githubWhite from "../../assets/github-logo-white.png";
 import "./style.css";
 
 function App() {
   const [text, setText] = useState("");
-  const [githubLogo, setGithubLogo] = useState(githubBlack);
   const introText: string =
     "Hello, My name is Keiran Bunyan.\nWelcome to kloner.dev";
 
