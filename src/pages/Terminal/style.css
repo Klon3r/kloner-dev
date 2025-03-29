@@ -1,6 +1,7 @@
 :root {
-  --background-color: #252525;
-  --title-color: #f7f3f2;
+  --background-color: #363636c0;
+  --shadow: #0000003b;
+  --title-color: #e6e4e3;
   --border-radius: 1px;
   --red-button: #ff6058;
   --yellow-button: #fdbb2c;
@@ -10,16 +11,16 @@
 }
 
 body {
-  background-color: #fae2ff;
+  /* background-color: #fae2ff; */
 }
 
 #terminal-main-div {
   display: flex;
   flex-direction: column;
   margin: auto;
-  width: 50vw;
+  width: 80vw;
   border-radius: var(--border-radius);
-  box-shadow: 8px 8px 8px var(--background-color);
+  box-shadow: 8px 8px 8px var(--shadow);
   height: 350px;
   max-height: 350px;
 }

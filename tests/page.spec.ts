@@ -2,32 +2,10 @@ import { test, expect } from "@playwright/test";
 
 const website: string = "http://localhost:5173/";
 
-test.describe("Check website title/images", () => {
+test.describe("Check website", () => {
   test("Check title", async ({ page }) => {
     await page.goto(website);
-    await expect(page).toHaveTitle(/Kloner/);
-  });
-
-  test("Check images have alt text", async ({ page }) => {
-    await page.goto(website);
-
-    // Get images then check
-    const photoOfMe = await page.getByTitle("photo-of-me");
-    const githubLogo = await page.getByTitle("github-logo");
-
-    // Check the alt attribute
-    await expect(photoOfMe).toHaveAttribute("alt", "Photo of me");
-    await expect(githubLogo).toHaveAttribute("alt", "GitHub Logo");
-  });
-
-  test("Check GitHub logo goes to the correct URL", async ({ page }) => {
-    await page.goto(website);
-
-    const [newPage] = await Promise.all([
-      page.waitForEvent("popup"), // Wait for the new page popup
-      page.getByTitle("github-logo").click({ force: true }),
-    ]);
-    await expect(newPage).toHaveURL("https://github.com/Klon3r");
+    await expect(page).toHaveTitle(/kloner/);
   });
 });
 

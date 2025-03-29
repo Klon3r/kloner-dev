@@ -4,7 +4,7 @@ import Error403 from "./pages/Error403";
 import Header from "./components/Header/Header";
 import App from "./pages/Terminal/App";
 
-import "./style.css";
+import "./Style.css";
 
 const router = createBrowserRouter([
   {
@@ -12,7 +12,17 @@ const router = createBrowserRouter([
     path: "/",
     element: (
       <>
+        <Header />
         <App />
+      </>
+    ),
+  },
+  {
+    //Homepage
+    path: "home",
+    element: (
+      <>
+        <Header />
       </>
     ),
   },
