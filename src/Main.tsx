@@ -9,22 +9,22 @@ import Homepage from "./pages/Homepage";
 
 const router = createBrowserRouter([
   {
-    // Root
-    path: "terminal",
-    element: (
-      <>
-        <Header />
-        <App />
-      </>
-    ),
-  },
-  {
     //Homepage
     path: "/",
     element: (
       <>
         <Header />
         <Homepage />
+      </>
+    ),
+  },
+  {
+    // Terminal
+    path: "/terminal",
+    element: (
+      <>
+        <Header />
+        <App />
       </>
     ),
   },
