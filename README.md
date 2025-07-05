@@ -1,6 +1,6 @@
 # kloner.dev
 
-My website that looks and operates like a terminal.
+This is my dev website, where I just post/create what I want
 
 [Link!](https://kloner.dev)
 
