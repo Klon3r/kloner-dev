@@ -5,11 +5,12 @@ import Header from "./components/Header/Header";
 import App from "./pages/Terminal/App";
 
 import "./Style.css";
+import Homepage from "./pages/Homepage";
 
 const router = createBrowserRouter([
   {
     // Root
-    path: "/",
+    path: "terminal",
     element: (
       <>
         <Header />
@@ -19,10 +20,11 @@ const router = createBrowserRouter([
   },
   {
     //Homepage
-    path: "home",
+    path: "/",
     element: (
       <>
         <Header />
+        <Homepage />
       </>
     ),
   },
