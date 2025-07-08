@@ -2,6 +2,13 @@ import { navigateNewTab, navigateTo } from "../../utils/navigate";
 import hamburgerIcon from "../../assets/icons/hamburger.png";
 import { useState } from "react";
 import AboutMe from "./AboutMe/AboutMe";
+import {
+  buttonStyle,
+  hamburgerIconStyle,
+  headerLinkDiv,
+  headerLinkText,
+  mobileStyle,
+} from "./Style";
 
 type HeaderLinks = {
   isMobile: boolean;
@@ -33,23 +40,17 @@ const HeaderLinks = ({ isMobile }: HeaderLinks) => {
         isMobile={isMobile}
       />
       {!isMobile ? (
-        <div className="flex gap-4 justify-center items-center text-lg mt-2 pl-20">
-          <a
-            className="hover:text-purple-500 hover:cursor-pointer hover:scale-115"
-            onClick={() => navigateTo("/")}
-          >
+        <div className={headerLinkDiv}>
+          <a className={headerLinkText} onClick={() => navigateTo("/")}>
             home
           </a>
           |
-          <a
-            className="hover:text-purple-500 hover:cursor-pointer hover:scale-115"
-            onClick={aboutMeOnClick}
-          >
+          <a className={headerLinkText} onClick={aboutMeOnClick}>
             about-me
           </a>
           |
           <a
-            className="hover:text-purple-500 hover:cursor-pointer hover:scale-115"
+            className={headerLinkText}
             onClick={() => navigateNewTab("https://github.com/Klon3r")}
           >
             github
@@ -57,30 +58,21 @@ const HeaderLinks = ({ isMobile }: HeaderLinks) => {
         </div>
       ) : (
         <div className="flex">
-          <button className="w-8 h8 mr-8" onClick={mobileMenuClick}>
-            <img
-              className="!border-none !shadow-none w-7 h-7 mt-1 object-contain filter hover:cursor-pointer dark:invert"
-              src={hamburgerIcon}
-            />
+          <button className={buttonStyle} onClick={mobileMenuClick}>
+            <img className={hamburgerIconStyle} src={hamburgerIcon} />
           </button>
           {mobileMenuClicked && (
-            <ul className="flex flex-row justify-center items-center fixed top-15 transform -translate-x-1/2 left-1/2 bg-white dark:bg-gray-800 gap-5 text-xl w-fit mt-1">
-              <li
-                className="hover:text-purple-500 hover:cursor-pointer hover:scale-115"
-                onClick={() => navigateTo("/")}
-              >
+            <ul className={mobileStyle}>
+              <li className={headerLinkText} onClick={() => navigateTo("/")}>
                 home
               </li>
               |
-              <li
-                className="hover:text-purple-500 hover:cursor-pointer hover:scale-115"
-                onClick={aboutMeOnClick}
-              >
+              <li className={headerLinkText} onClick={aboutMeOnClick}>
                 about-me
               </li>
               |
               <li
-                className="hover:text-purple-500 hover:cursor-pointer hover:scale-115"
+                className={headerLinkText}
                 onClick={() => navigateNewTab("https://github.com/Klon3r")}
               >
                 github
