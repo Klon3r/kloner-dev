@@ -1,20 +1,27 @@
-export interface Theme {
-  backgroundColor: string;
-  textColor: string;
-  buttonBackgroundColor: string;
-  buttonTextColor: string;
-}
-
-export const lightTheme: Theme = {
-  backgroundColor: "#E6DFF1", // Light Lavender
-  textColor: "#3E1F56", // Deep Purple
-  buttonBackgroundColor: "#A569BD", // Bright Purple
-  buttonTextColor: "#FFFFFF", // White
+export const checkThemeInBrowser = (
+  setUseState: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  if (
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches
+  )
+    toggleTheme(setUseState);
 };
 
-export const darkTheme: Theme = {
-  backgroundColor: "#2B1B3D", // Dark Purple
-  textColor: "#DCC6E0", // Soft Lavender White
-  buttonBackgroundColor: "#8E44AD", // Vibrant Purple
-  buttonTextColor: "#2B1B3D", // Dark Purple
+export const toggleTheme = (
+  setUseState: React.Dispatch<React.SetStateAction<boolean>>
+) => {
+  setUseState((prev) => {
+    const next = !prev;
+    if (next) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+    return next;
+  });
+};
+
+export const setTheme = (isDarkMode: boolean) => {
+  if (isDarkMode) document.documentElement.classList.add("dark");
 };
