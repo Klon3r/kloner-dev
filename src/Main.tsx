@@ -31,7 +31,12 @@ const router = createBrowserRouter([
   {
     // 403 Error
     path: "*",
-    element: <Error403 />,
+    element: (
+      <>
+        <Header />
+        <Error403 />
+      </>
+    ),
   },
 ]);
 
