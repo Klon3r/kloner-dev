@@ -14,6 +14,7 @@ const Timer = () => {
     setTimeRemaining(minute);
     setCountdownFinished(false);
     setCountdownStarted(true);
+    setMinute(5);
   };
 
   useEffect(() => {
