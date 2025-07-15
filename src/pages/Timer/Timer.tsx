@@ -12,7 +12,8 @@ const Timer = () => {
   const startCountdown = () => {
     console.log("countdownStarted");
     setTimeRemaining(minute);
-    setCountdownStarted((started) => !started);
+    setCountdownFinished(false);
+    setCountdownStarted(true);
   };
 
   useEffect(() => {
