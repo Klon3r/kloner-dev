@@ -6,6 +6,7 @@ import App from "./pages/Terminal/App";
 
 import "./Style.css";
 import Homepage from "./pages/Homepage";
+import Timer from "./pages/Timer/Timer";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,16 @@ const router = createBrowserRouter([
       <>
         <Header />
         <App />
+      </>
+    ),
+  },
+  // Timer
+  {
+    path: "/timer",
+    element: (
+      <>
+        <Header />
+        <Timer />
       </>
     ),
   },
