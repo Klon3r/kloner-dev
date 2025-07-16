@@ -31,7 +31,7 @@ export const headerLinkDiv = tw(
 );
 
 export const mobileStyle = tw(
-  "flex flex-row justify-center items-center absolute top-15 left-0 right-0 bg-white dark:bg-gray-800 gap-5 text-xl w-full mt-1 z-50"
+  "flex flex-row justify-center items-center absolute top-15 left-0 right-0 bg-white dark:bg-neutral-800 gap-5 text-xl w-full mt-1 z-50"
 );
 
 export const buttonStyle = tw("w-10 h8 mr-8");
