@@ -1,6 +1,6 @@
 import { useState } from "react";
 import mePhoto from "../../../assets/photo-me-cropped.png";
-import { getAge } from "../../../utils/getAge";
+import { getAge } from "../../../utils/time";
 import closeButtonIcon from "../../../assets/icons/close.png";
 
 type AboutMeModalType = {
