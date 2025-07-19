@@ -1,6 +1,11 @@
 import clsx from "clsx";
 import { flexCenter, flexCol, textColor } from "../../StyleGlobal";
-import { timerButtonContainer, timerButtonStyle, timerDisplay } from "./Style";
+import {
+  minuteButton,
+  timerButton,
+  timerButtonContainer,
+  timerDisplay,
+} from "./Style";
 import { useEffect, useState } from "react";
 import { convertMinutesToSeconds } from "../../utils/time";
 
@@ -50,6 +55,16 @@ const Timer = () => {
     setDisplaySecond(second);
   };
 
+  const addMinutes = () => {
+    setMinute((prev) => prev + 1);
+  };
+
+  const removeMinutes = () => {
+    if (minute - 1 >= 1) {
+      setMinute((prev) => prev - 1);
+    }
+  };
+
   useEffect(() => {
     if (countdownStarted && !countdownFinished) {
       const countdownInterval = setInterval(() => {
@@ -61,18 +76,28 @@ const Timer = () => {
 
   return (
     <div className={clsx(flexCenter, flexCol, textColor)}>
+      <div>
+        <button className={minuteButton} onClick={addMinutes}>
+          +
+        </button>
+      </div>
       <div className={timerDisplay}>
         {countdownFinished
           ? "Finished"
           : countdownStarted
           ? `${displayMinute} : ${displaySecond}`
-          : `${minute} mins`}
+          : `${minute} min`}
+      </div>
+      <div>
+        <button className={minuteButton} onClick={removeMinutes}>
+          -
+        </button>
       </div>
       <div className={timerButtonContainer}>
-        <button className={timerButtonStyle} onClick={startCountdown}>
+        <button className={timerButton} onClick={startCountdown}>
           START
         </button>
-        <button className={timerButtonStyle} onClick={clearCountdown}>
+        <button className={timerButton} onClick={clearCountdown}>
           CLEAR
         </button>
       </div>
