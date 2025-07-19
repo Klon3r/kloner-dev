@@ -2,7 +2,7 @@ const tw = (classes: string) => classes;
 
 export const purpleText = tw("text-purple-500");
 
-export const klonerTextDiv = tw("pb-2 text-3xl pr-1");
+export const klonerTextDiv = tw("pb-2 text-3xl pr-1 pl-1");
 
 export const headerContainer = tw(
   "flex justify-center mb-20 px-4 w-fit mx-auto"
