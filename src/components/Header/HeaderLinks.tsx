@@ -39,24 +39,7 @@ const HeaderLinks = ({ isMobile }: HeaderLinks) => {
         onClose={aboutMeOnClose}
         isMobile={isMobile}
       />
-      {!isMobile ? (
-        <div className={headerLinkDiv}>
-          <a className={headerLinkText} onClick={() => navigateTo("/")}>
-            home
-          </a>
-          |
-          <a className={headerLinkText} onClick={aboutMeOnClick}>
-            about-me
-          </a>
-          |
-          <a
-            className={headerLinkText}
-            onClick={() => navigateNewTab("https://github.com/Klon3r")}
-          >
-            github
-          </a>
-        </div>
-      ) : (
+      {isMobile ? (
         <div className="flex">
           <button className={buttonStyle} onClick={mobileMenuClick}>
             <img className={hamburgerIconStyle} src={hamburgerIcon} />
@@ -79,6 +62,23 @@ const HeaderLinks = ({ isMobile }: HeaderLinks) => {
               </li>
             </ul>
           )}
+        </div>
+      ) : (
+        <div className={headerLinkDiv}>
+          <a className={headerLinkText} onClick={() => navigateTo("/")}>
+            home
+          </a>
+          |
+          <a className={headerLinkText} onClick={aboutMeOnClick}>
+            about-me
+          </a>
+          |
+          <a
+            className={headerLinkText}
+            onClick={() => navigateNewTab("https://github.com/Klon3r")}
+          >
+            github
+          </a>
         </div>
       )}
     </div>
