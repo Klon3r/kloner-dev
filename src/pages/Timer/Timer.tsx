@@ -19,6 +19,7 @@ const Timer = () => {
 
   const [countdownStarted, setCountdownStarted] = useState(false);
   const [countdownFinished, setCountdownFinished] = useState(false);
+  const [countdownPause, setCountdownPause] = useState(false);
 
   const sendNotification = () => {
     if (!("Notification" in window)) {
@@ -47,11 +48,16 @@ const Timer = () => {
     setMinute(minute);
   };
 
-  const clearCountdown = () => {
+  const resetCountdown = () => {
     setCountdownFinished(false);
     setCountdownStarted(false);
     setMinute(30);
     setTimeRemaining(minute);
+    setCountdownPause(false);
+  };
+
+  const pauseCountdown = () => {
+    setCountdownPause((prev) => !prev);
   };
 
   const calculateTimer = (interval: NodeJS.Timeout) => {
@@ -79,19 +85,23 @@ const Timer = () => {
   const addMinutes = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    const addTime = event.shiftKey ? 1 : 5;
-    setMinute((prev) => prev + addTime);
+    if (!countdownStarted) {
+      const addTime = event.shiftKey ? 1 : 5;
+      setMinute((prev) => prev + addTime);
+    }
   };
 
   const removeMinutes = (
     event: React.MouseEvent<HTMLButtonElement, MouseEvent>
   ) => {
-    const removeTime = event.shiftKey ? 1 : 5;
-    if (minute - removeTime >= 1) setMinute((prev) => prev - removeTime);
+    if (!countdownStarted) {
+      const removeTime = event.shiftKey ? 1 : 5;
+      if (minute - removeTime >= 1) setMinute((prev) => prev - removeTime);
+    }
   };
 
   useEffect(() => {
-    if (countdownStarted && !countdownFinished) {
+    if (countdownStarted && !countdownFinished && !countdownPause) {
       const countdownInterval = setInterval(() => {
         calculateTimer(countdownInterval);
       }, 1000);
@@ -99,7 +109,7 @@ const Timer = () => {
     }
 
     if (countdownFinished) sendNotification();
-  }, [countdownStarted, timeRemaining, countdownFinished]);
+  }, [countdownStarted, timeRemaining, countdownFinished, countdownPause]);
 
   return (
     <div className={clsx(flexCenter, flexCol, textColor)}>
@@ -121,11 +131,18 @@ const Timer = () => {
         </button>
       </div>
       <div className={timerButtonContainer}>
-        <button className={timerButton} onClick={startCountdown}>
-          START
-        </button>
-        <button className={timerButton} onClick={clearCountdown}>
-          CLEAR
+        {countdownStarted ? (
+          <button className={timerButton} onClick={pauseCountdown}>
+            PAUSE
+          </button>
+        ) : (
+          <button className={timerButton} onClick={startCountdown}>
+            START
+          </button>
+        )}
+
+        <button className={timerButton} onClick={resetCountdown}>
+          RESET
         </button>
       </div>
     </div>
