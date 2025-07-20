@@ -8,9 +8,10 @@ import {
 } from "./Style";
 import { useEffect, useState } from "react";
 import { convertMinutesToSeconds } from "../../utils/time";
+import timerIcon from "../..//assets/icons/timer.png";
 
 const Timer = () => {
-  const [minute, setMinute] = useState(5);
+  const [minute, setMinute] = useState(30);
   const [timeRemaining, setTimeRemaining] = useState(0);
 
   const [displayMinute, setDisplayMinute] = useState(minute);
@@ -18,6 +19,25 @@ const Timer = () => {
 
   const [countdownStarted, setCountdownStarted] = useState(false);
   const [countdownFinished, setCountdownFinished] = useState(false);
+
+  const sendNotification = () => {
+    if (!("Notification" in window)) {
+      alert("Notification not supported");
+      return;
+    }
+
+    Notification.requestPermission().then((permission) => {
+      if (permission == "granted") {
+        const notification = new Notification("Times up!", {
+          body: "The timer has finished",
+          icon: timerIcon,
+          tag: "timer",
+          requireInteraction: true,
+        });
+        console.log(notification);
+      }
+    });
+  };
 
   const startCountdown = () => {
     const totalSeconds = convertMinutesToSeconds(minute) - 1;
@@ -30,6 +50,7 @@ const Timer = () => {
   const clearCountdown = () => {
     setCountdownFinished(false);
     setCountdownStarted(false);
+    setMinute(30);
     setTimeRemaining(minute);
   };
 
@@ -55,14 +76,18 @@ const Timer = () => {
     setDisplaySecond(second);
   };
 
-  const addMinutes = () => {
-    setMinute((prev) => prev + 1);
+  const addMinutes = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const addTime = event.shiftKey ? 1 : 5;
+    setMinute((prev) => prev + addTime);
   };
 
-  const removeMinutes = () => {
-    if (minute - 1 >= 1) {
-      setMinute((prev) => prev - 1);
-    }
+  const removeMinutes = (
+    event: React.MouseEvent<HTMLButtonElement, MouseEvent>
+  ) => {
+    const removeTime = event.shiftKey ? 1 : 5;
+    if (minute - removeTime >= 1) setMinute((prev) => prev - removeTime);
   };
 
   useEffect(() => {
@@ -72,12 +97,14 @@ const Timer = () => {
       }, 1000);
       return () => clearInterval(countdownInterval);
     }
-  }, [countdownStarted, timeRemaining]);
+
+    if (countdownFinished) sendNotification();
+  }, [countdownStarted, timeRemaining, countdownFinished]);
 
   return (
     <div className={clsx(flexCenter, flexCol, textColor)}>
       <div>
-        <button className={minuteButton} onClick={addMinutes}>
+        <button className={minuteButton} onClick={(e) => addMinutes(e)}>
           +
         </button>
       </div>
@@ -85,7 +112,7 @@ const Timer = () => {
         {countdownFinished
           ? "Finished"
           : countdownStarted
-          ? `${displayMinute} : ${displaySecond}`
+          ? `${displayMinute} : ${displaySecond.toString().padStart(2, "0")}`
           : `${minute} min`}
       </div>
       <div>
