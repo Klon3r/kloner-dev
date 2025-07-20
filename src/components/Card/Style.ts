@@ -1,6 +1,6 @@
 const tw = (classes: string) => classes;
 
-export const hoverImageStyle = tw("hover:rounded-2xl hover:cursor-pointer");
+export const hoverImageStyle = tw("hover:rounded-xl hover:cursor-pointer");
 
 export const imageStyle = tw(
   "!max-w-none !w-80 !shadow-none h-auto !border-1 !border-purple-400 !m-0"

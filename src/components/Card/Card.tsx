@@ -5,27 +5,14 @@ import {
   imageStyle,
   mobileImageStyle,
 } from "./Style";
-import { useEffect, useState } from "react";
 
 type CardType = {
   imageSrc: string;
   onClick: () => void;
+  isMobile: boolean;
 };
 
-const Card = ({ imageSrc, onClick }: CardType) => {
-  const [isMobile, setIsMobile] = useState(false);
-
-  const checkMobileDevice = () => {
-    setIsMobile(window.innerWidth < 768);
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", checkMobileDevice);
-    return () => {
-      window.removeEventListener("resize", checkMobileDevice);
-    };
-  }, []);
-
+const Card = ({ imageSrc, onClick, isMobile }: CardType) => {
   return (
     <div className={divStyle}>
       <img
