@@ -3,6 +3,9 @@ import DarkModeToggleButton from "./DarkModeToggleButton";
 import HeaderLinks from "./HeaderLinks";
 import { headerContainer, headerDiv, klonerTextDiv, purpleText } from "./Style";
 import { checkThemeInBrowser, setTheme, toggleTheme } from "../../utils/theme";
+import { navigateTo } from "../../utils/navigate";
+import { hoverStyle } from "../../StyleGlobal";
+import clsx from "clsx";
 
 const Header = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
@@ -28,7 +31,12 @@ const Header = () => {
       <div className={headerContainer}>
         <div className={headerDiv}>
           <h3 className={klonerTextDiv}>
-            <span className={purpleText}>kloner</span>
+            <span
+              className={clsx(purpleText, hoverStyle)}
+              onClick={() => navigateTo("/")}
+            >
+              kloner
+            </span>
             .dev
           </h3>
           <HeaderLinks isMobile={isMobile} />
