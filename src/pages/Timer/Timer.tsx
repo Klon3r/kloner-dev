@@ -22,22 +22,14 @@ const Timer = () => {
   const [countdownPause, setCountdownPause] = useState(false);
 
   const sendNotification = () => {
-    if (!("Notification" in window)) {
-      alert("Notification not supported");
-      return;
+    if ("Notification" in window && Notification.permission === "granted") {
+      new Notification("Times up!", {
+        body: "The timer has finished",
+        icon: timerIcon,
+        tag: "timer",
+        requireInteraction: true,
+      });
     }
-
-    Notification.requestPermission().then((permission) => {
-      if (permission == "granted") {
-        const notification = new Notification("Times up!", {
-          body: "The timer has finished",
-          icon: timerIcon,
-          tag: "timer",
-          requireInteraction: true,
-        });
-        console.log(notification);
-      }
-    });
   };
 
   const startCountdown = () => {
@@ -110,6 +102,12 @@ const Timer = () => {
 
     if (countdownFinished) sendNotification();
   }, [countdownStarted, timeRemaining, countdownFinished, countdownPause]);
+
+  useEffect(() => {
+    if ("Notification" in window && Notification.permission == "default") {
+      Notification.requestPermission();
+    }
+  }, []);
 
   return (
     <div className={clsx(flexCenter, flexCol, textColor)}>
