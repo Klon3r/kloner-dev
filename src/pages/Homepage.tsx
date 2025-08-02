@@ -1,5 +1,4 @@
 import Card from "../components/Card/Card";
-import terminalKlone from "../assets/cards/terminal-klone.png";
 import timer from "../assets/cards/timer.png";
 import { navigateTo } from "../utils/navigate";
 import { useEffect, useState } from "react";
@@ -25,11 +24,6 @@ const Homepage = () => {
       <Card
         imageSrc={timer}
         onClick={() => navigateTo("timer")}
-        isMobile={isMobile}
-      />
-      <Card
-        imageSrc={terminalKlone}
-        onClick={() => navigateTo("terminal")}
         isMobile={isMobile}
       />
     </div>
