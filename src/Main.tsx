@@ -3,7 +3,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Error403 from "./pages/Error403";
 import Header from "./components/Header/Header";
 
-import "./Style.css";
+import "./index.css";
 import Homepage from "./pages/Homepage";
 import Timer from "./pages/Timer/Timer";
 

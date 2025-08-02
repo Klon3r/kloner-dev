@@ -14,15 +14,18 @@
   "dependencies": {
     "@vercel/node": "^5.1.14",
     "@vercel/static-build": "^2.7.6",
+    "class-variance-authority": "^0.7.1",
+    "lucide-react": "^0.536.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.3.1",
     "vercel": "^44.2.12"
   },
   "devDependencies": {
     "@playwright/test": "^1.51.0",
     "@tailwindcss/vite": "^4.0.17",
-    "@types/node": "^24.0.10",
+    "@types/node": "^24.1.0",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "@typescript-eslint/eslint-plugin": "^8.26.1",
@@ -34,6 +37,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "react-router-dom": "^7.3.0",
     "tailwindcss": "^4.0.17",
+    "tw-animate-css": "^1.3.6",
     "typescript": "^5.8.2",
     "vite": "^7.0.2"
   }
