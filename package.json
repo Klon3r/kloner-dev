@@ -12,6 +12,9 @@
     "test-ui": "playwright test --ui"
   },
   "dependencies": {
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-separator": "^1.1.7",
+    "@radix-ui/react-slot": "^1.2.3",
     "@vercel/node": "^5.1.14",
     "@vercel/static-build": "^2.7.6",
     "class-variance-authority": "^0.7.1",

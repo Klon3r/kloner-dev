@@ -1,6 +1,5 @@
 import moonIcon from "../../assets/icons/moon.png";
 import sunIcon from "../../assets/icons/sun.png";
-import { darkModeButtonStyle, themeButtonStyle } from "./Style";
 
 type DarkModeToggleButtonProps = {
   onClick: () => void;
@@ -13,9 +12,9 @@ const DarkModeToggleButton = ({
 }: DarkModeToggleButtonProps) => {
   return (
     <div>
-      <button className={themeButtonStyle} onClick={onClick}>
+      <button className="w-full pl-0 mt-1 ml-4" onClick={onClick}>
         <img
-          className={darkModeButtonStyle}
+          className="!border-none !shadow-none w-7! h-6 mt-1 object-contain filter hover:cursor-pointer dark:invert mr-0!"
           src={isDarkMode ? sunIcon : moonIcon}
           alt={isDarkMode ? "Sun icon" : "Moon icon"}
         />
