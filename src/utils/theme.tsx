@@ -9,6 +9,30 @@ export const checkThemeInBrowser = () => {
   }
 };
 
+export const getDarkModeFromLocalStorage = () => {
+  const darkMode = localStorage.getItem("dark-mode");
+
+  return darkMode === "true";
+};
+
+export const getThemeFromLocalStorage = () => {
+  const themeColor = localStorage.getItem("theme-color");
+
+  if (!themeColor) return "violet";
+
+  return themeColor;
+};
+
+export const setThemeInLocalStorage = (theme: string) => {
+  if (!theme) return;
+  localStorage.setItem("theme-color", theme);
+};
+
+export const setDarkModeInLocalStorage = (darkMode: string) => {
+  if (!darkMode) return;
+  localStorage.setItem("dark-mode", darkMode);
+};
+
 export const toggleTheme = (
   setUseState: React.Dispatch<React.SetStateAction<boolean>>
 ) => {

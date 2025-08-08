@@ -1,14 +1,15 @@
 import { navigateTo } from "@/utils/navigate";
 import { Separator } from "@/components/ui/separator";
 import Links from "./Links";
-import { checkThemeInBrowser } from "@/utils/theme";
+import { getDarkModeFromLocalStorage } from "@/utils/theme";
 import { useEffect, useState } from "react";
 import ThemeSelectorDropdown from "./ThemeSelectorDropdown";
 
 const HeaderBar = () => {
   const [isDarkMode, setIsDarkMode] = useState<boolean>(() =>
-    checkThemeInBrowser()
+    getDarkModeFromLocalStorage()
   );
+
   const [isMobile, setIsMobile] = useState(false);
 
   const handleLogoClick = () => {

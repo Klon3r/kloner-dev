@@ -12,7 +12,12 @@ import {
 import moonIcon from "../../assets/icons/moon.png";
 import sunIcon from "../../assets/icons/sun.png";
 import { useEffect, useState } from "react";
-import { setColorTheme } from "@/utils/theme";
+import {
+  getThemeFromLocalStorage,
+  setColorTheme,
+  setDarkModeInLocalStorage,
+  setThemeInLocalStorage,
+} from "@/utils/theme";
 
 type ThemeSelectorDropdownType = {
   isDarkMode: boolean;
@@ -23,16 +28,31 @@ const ThemeSelectorDropdown = ({
   isDarkMode,
   setIsDarkMode,
 }: ThemeSelectorDropdownType) => {
-  const [colorPosition, setColorPosition] = useState("violet");
+  const [colorPosition, setColorPosition] = useState(
+    getThemeFromLocalStorage()
+  );
+  const [themeColor, setThemeColor] = useState(getThemeFromLocalStorage());
   const [darkModePosition, setDarkModePosition] = useState(String(isDarkMode));
-  const [themeColor, setThemeColor] = useState("violet");
+
+  const themeColorOnValueChange = (value: string) => {
+    setColorPosition(value);
+    setColorTheme(value, isDarkMode);
+    setThemeInLocalStorage(value);
+  };
+
+  const darkModeOnValueChange = (value: string) => {
+    setDarkModePosition(value);
+    setIsDarkMode(value === "true");
+    setDarkModeInLocalStorage(value);
+    setColorTheme(colorPosition, value === "true");
+  };
 
   const dropdownHoverStyle =
     "hover:cursor-pointer hover:bg-primary! hover:rounded-2xl!";
 
   useEffect(() => {
     setColorTheme(themeColor, isDarkMode);
-    setThemeColor("violet"); // TODO: Remove one localStorage themes is added
+    setThemeColor(themeColor);
   }, []);
 
   return (
@@ -56,8 +76,7 @@ const ThemeSelectorDropdown = ({
           <DropdownMenuRadioGroup
             value={colorPosition}
             onValueChange={(value) => {
-              setColorPosition(value);
-              setColorTheme(value, isDarkMode);
+              themeColorOnValueChange(value);
             }}
           >
             <DropdownMenuRadioItem value="red" className={dropdownHoverStyle}>
@@ -96,9 +115,7 @@ const ThemeSelectorDropdown = ({
           <DropdownMenuRadioGroup
             value={darkModePosition}
             onValueChange={(value) => {
-              setDarkModePosition(value);
-              setIsDarkMode(value === "true");
-              setColorTheme(colorPosition, value === "true");
+              darkModeOnValueChange(value);
             }}
           >
             <DropdownMenuRadioItem value="true" className={dropdownHoverStyle}>
