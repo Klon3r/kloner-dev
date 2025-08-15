@@ -1,13 +1,15 @@
 import { navigateNewTab, navigateTo } from "@/utils/navigate";
 import hamburgerIcon from "../../assets/icons/hamburger.png";
 import { useState } from "react";
+import CardHover from "../CardHover/CardHover";
+import { Button } from "../ui/button";
 
 type LinksType = {
   isMobile: boolean;
 };
 
 const Links = ({ isMobile }: LinksType) => {
-  return <div>{isMobile ? <HeaderLinksMobile /> : <HeaderLinks />}</div>;
+  return <div>{isMobile ? <HeaderLinksMobile /> : <HeaderLinksDesktop />}</div>;
 };
 
 const HeaderLinksMobile = () => {
@@ -48,27 +50,44 @@ const HeaderLinksMobile = () => {
   );
 };
 
-const HeaderLinks = () => {
+const HeaderLinksDesktop = () => {
   const handleHomeClick = () => {
     navigateTo("/");
   };
 
-  const hoverStyle = "hover:text-primary hover:cursor-pointer hover:scale-110";
+  const linkButtonStyle =
+    "dark:text-white hover:text-primary! text-black text-lg m-0 p-0 hover:text-primary text-lg!";
 
   return (
-    <div className="flex items-center space-x-4 py-2">
-      <div className={hoverStyle} onClick={handleHomeClick}>
-        home
+    <div className="flex items-center space-x-4">
+      <div>
+        <Button
+          variant="link"
+          className={linkButtonStyle}
+          onClick={handleHomeClick}
+        >
+          home
+        </Button>
       </div>
       <div>|</div>
-      <div
-        className={hoverStyle}
-        onClick={() => navigateNewTab("https://github.com/Klon3r")}
-      >
-        github
+      <div>
+        <CardHover
+          linkName="Github"
+          buttonClassName={linkButtonStyle}
+          onClick={() => navigateNewTab("https://github.com/Klon3r")}
+          heading="@Klon3r"
+          text="Curious about my code? Explore my GitHub profile and see what I'm building!"
+          avatarImage="https:www.github.com/github.png"
+          avatarFallback="GH"
+          alt="@github"
+        />
       </div>
       <div>|</div>
-      <div className={hoverStyle}>about-me</div>
+      <div>
+        <Button variant="link" className={linkButtonStyle}>
+          about-me
+        </Button>
+      </div>
     </div>
   );
 };
