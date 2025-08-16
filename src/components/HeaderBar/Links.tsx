@@ -3,6 +3,7 @@ import hamburgerIcon from "../../assets/icons/hamburger.png";
 import { useState } from "react";
 import CardHover from "../CardHover/CardHover";
 import { Button } from "../ui/button";
+import githubIcon from "../../assets/icons/github.png";
 
 type LinksType = {
   isMobile: boolean;
@@ -77,9 +78,11 @@ const HeaderLinksDesktop = () => {
           onClick={() => navigateNewTab("https://github.com/Klon3r")}
           heading="@Klon3r"
           text="Curious about my code? Explore my GitHub profile and see what I'm building!"
-          avatarImage="https:www.github.com/github.png"
+          avatarImage={githubIcon}
           avatarFallback="GH"
           alt="@github"
+          openDelay={100}
+          closeDelay={100}
         />
       </div>
       <div>|</div>
