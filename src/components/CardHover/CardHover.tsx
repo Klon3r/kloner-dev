@@ -9,8 +9,8 @@ import { AvatarFallback, AvatarImage } from "../ui/avatar";
 import { getDarkModeFromLocalStorage } from "@/utils/theme";
 import clsx from "clsx";
 
-type CardHoverTypes = {
-  linkName: string;
+type CardHoverType = {
+  name: string;
   heading: string;
   avatarImage: string;
   openDelay?: number;
@@ -23,7 +23,7 @@ type CardHoverTypes = {
 };
 
 const CardHover = ({
-  linkName,
+  name,
   onClick,
   buttonClassName,
   text,
@@ -33,14 +33,14 @@ const CardHover = ({
   alt,
   openDelay = 700, // Default from Shadcn (https://www.radix-ui.com/primitives/docs/components/hover-card#api-reference)
   closeDelay = 300, // Default from Shadcn (https://www.radix-ui.com/primitives/docs/components/hover-card#api-reference),
-}: CardHoverTypes) => {
+}: CardHoverType) => {
   const darkMode = getDarkModeFromLocalStorage();
 
   return (
     <HoverCard openDelay={openDelay} closeDelay={closeDelay}>
       <HoverCardTrigger asChild>
         <Button variant="link" className={buttonClassName} onClick={onClick}>
-          {linkName}
+          {name}
         </Button>
       </HoverCardTrigger>
       <HoverCardContent className="w-80">

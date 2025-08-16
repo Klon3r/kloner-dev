@@ -4,7 +4,8 @@ import { useState } from "react";
 import CardHover from "../CardHover/CardHover";
 import { Button } from "../ui/button";
 import githubIcon from "../../assets/icons/github.png";
-
+import AboutMe from "../AboutMe/AboutMe";
+import { linkButtonStyle } from "./Style";
 type LinksType = {
   isMobile: boolean;
 };
@@ -56,9 +57,6 @@ const HeaderLinksDesktop = () => {
     navigateTo("/");
   };
 
-  const linkButtonStyle =
-    "dark:text-white hover:text-primary! text-black text-lg m-0 p-0 hover:text-primary text-lg!";
-
   return (
     <div className="flex items-center space-x-4">
       <div>
@@ -73,7 +71,7 @@ const HeaderLinksDesktop = () => {
       <div>|</div>
       <div>
         <CardHover
-          linkName="Github"
+          name="github"
           buttonClassName={linkButtonStyle}
           onClick={() => navigateNewTab("https://github.com/Klon3r")}
           heading="@Klon3r"
@@ -81,15 +79,13 @@ const HeaderLinksDesktop = () => {
           avatarImage={githubIcon}
           avatarFallback="GH"
           alt="@github"
-          openDelay={100}
+          openDelay={200}
           closeDelay={100}
         />
       </div>
       <div>|</div>
       <div>
-        <Button variant="link" className={linkButtonStyle}>
-          about-me
-        </Button>
+        <AboutMe />
       </div>
     </div>
   );
