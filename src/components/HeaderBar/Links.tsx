@@ -23,6 +23,10 @@ const HeaderLinksMobile = () => {
       : setMobileMenuClicked(true);
   };
 
+  const handleHomeClick = () => {
+    navigateTo("/");
+  };
+
   const hoverStyle = "hover:text-primary hover:cursor-pointer hover:scale-110";
 
   return (
@@ -33,19 +37,30 @@ const HeaderLinksMobile = () => {
         onClick={mobileMenuClick}
       />
       {mobileMenuClicked && (
-        <div className="flex flex-row justify-center absolute top-13 left-0 right-0 gap-3">
-          <div className={hoverStyle} onClick={() => navigateTo("/")}>
-            home
+        <div className="flex flex-row justify-center absolute top-12 left-0 right-0 gap-3 items-center">
+          <div>
+            <Button
+              variant="link"
+              className={linkButtonStyle}
+              onClick={handleHomeClick}
+            >
+              home
+            </Button>
           </div>
           <div>|</div>
-          <div
-            className={hoverStyle}
-            onClick={() => navigateNewTab("https://github.com/Klon3r")}
-          >
-            github
+          <div>
+            <Button
+              variant="link"
+              className={linkButtonStyle}
+              onClick={() => navigateNewTab("https://github.com/Klon3r")}
+            >
+              github
+            </Button>
           </div>
           <div>|</div>
-          <div className={hoverStyle}>about-me</div>
+          <div>
+            <AboutMe />
+          </div>
         </div>
       )}
     </div>
