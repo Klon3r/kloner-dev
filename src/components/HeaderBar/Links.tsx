@@ -27,8 +27,6 @@ const HeaderLinksMobile = () => {
     navigateTo("/");
   };
 
-  const hoverStyle = "hover:text-primary hover:cursor-pointer hover:scale-110";
-
   return (
     <div className="flex items-center">
       <img
