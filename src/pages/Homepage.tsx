@@ -1,9 +1,9 @@
-import Card from "../components/Card/Card";
-import timer from "../assets/cards/timer.png";
-import { navigateTo } from "../utils/navigate";
 import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { containerDiv, mobileContainerDiv } from "./Style";
+import ContentCard from "../components/ContentCard/ContentCard";
+
+import timerImage from "../assets/cards/timer.png";
 
 const Homepage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -21,10 +21,11 @@ const Homepage = () => {
 
   return (
     <div className={clsx(containerDiv, isMobile ? mobileContainerDiv : "")}>
-      <Card
-        imageSrc={timer}
-        onClick={() => navigateTo("timer")}
-        isMobile={isMobile}
+      <ContentCard
+        title="Countdown"
+        cardImage={timerImage}
+        description="Start a countdown and get notified the moment it finishes"
+        url="/timer"
       />
     </div>
   );
