@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 import clsx from "clsx";
-import { containerDiv, mobileContainerDiv } from "./Style";
 import ContentCard from "../components/ContentCard/ContentCard";
 
 import timerImage from "../assets/cards/timer.png";
@@ -20,7 +19,12 @@ const Homepage = () => {
   }, []);
 
   return (
-    <div className={clsx(containerDiv, isMobile ? mobileContainerDiv : "")}>
+    <div
+      className={clsx(
+        "flex justify-center gap-5 items-center mx-10",
+        isMobile ? "flex-col" : ""
+      )}
+    >
       <ContentCard
         title="Countdown"
         cardImage={timerImage}
