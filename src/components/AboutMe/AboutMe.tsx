@@ -23,26 +23,28 @@ const AboutMe = () => {
         </Button>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
-        <DialogTitle>About Me</DialogTitle>
+        <DialogTitle className="font-extrabold text-lg">About Me</DialogTitle>
         <DialogHeader>
           <div className="flex flex-col flex-wrap gap-5">
             <div className="flex flex-row gap-3">
               <Avatar>
                 <AvatarImage
-                  className="w-25 rounded-2xl"
+                  className="w-25 rounded-2xl "
                   src={mePhoto}
                   alt="Photo of Keiran"
                 />
-                <AvatarFallback>ME</AvatarFallback>
+                <AvatarFallback className="min-w-25">ME</AvatarFallback>
               </Avatar>
-              <div>
+              <div className="flex flex-col justify-start items-start">
                 <ul>
-                  <li className="pb-1 text-lg">Keiran Bunyan</li>
-                  <li className="pl-5 text-sm">{currentAge}</li>
-                  <li className="pl-5 text-sm">He/Him</li>
-                  <li className="pl-5 text-sm">Brisbane</li>
-                  <li className="pl-5 text-sm">Software Developer</li>
-                  <li className="pl-5 text-sm">I use Arch btw</li>
+                  <li className="pb-1 text-lg font-bold">Keiran Bunyan</li>
+                  <li className="pl-5 text-sm text-start">{currentAge}</li>
+                  <li className="pl-5 text-sm text-start">He/Him</li>
+                  <li className="pl-5 text-sm text-start">Brisbane</li>
+                  <li className="pl-5 text-sm text-start">
+                    Software Developer
+                  </li>
+                  <li className="pl-5 text-sm text-start">I use Arch btw</li>
                 </ul>
               </div>
             </div>
