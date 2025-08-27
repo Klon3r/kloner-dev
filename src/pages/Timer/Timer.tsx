@@ -131,7 +131,7 @@ const Timer = () => {
       <div className={timerButtonContainer}>
         {countdownStarted ? (
           <button className={timerButton} onClick={pauseCountdown}>
-            PAUSE
+            {countdownPause ? "RESUME" : "PAUSE"}
           </button>
         ) : (
           <button className={timerButton} onClick={startCountdown}>
