@@ -6,6 +6,7 @@ import "./index.css";
 import Homepage from "./pages/Homepage";
 import Timer from "./pages/Timer/Timer";
 import HeaderBar from "./components/HeaderBar/HeaderBar";
+import GameLog from "./pages/GameLog";
 
 const router = createBrowserRouter([
   {
@@ -25,6 +26,16 @@ const router = createBrowserRouter([
       <>
         <HeaderBar />
         <Timer />
+      </>
+    ),
+  },
+  {
+    // GameLog
+    path: "/games",
+    element: (
+      <>
+        <HeaderBar />
+        <GameLog />
       </>
     ),
   },
