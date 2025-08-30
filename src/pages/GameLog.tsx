@@ -2,8 +2,8 @@ import { Button } from "@/components/ui/button";
 
 const GameLog = () => {
   const FETCH_URL =
-    process.env.NODE_ENV === "PROD"
-      ? "api/games"
+    process.env.ENVIRONMENT === "PROD"
+      ? "/api/games"
       : "http://localhost:3000/api/games";
 
   const getDB = () => {
