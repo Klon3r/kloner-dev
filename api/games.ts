@@ -1,7 +1,7 @@
 import { createClient } from "@libsql/client";
 
 const ALLOWED_ORIGIN =
-  process.env.ENVIRONMENT === "PROD" ? "https://kloner.dev/" : "*";
+  process.env.NODE_ENV === "production" ? "https://kloner.dev/" : "*";
 
 const client = createClient({
   url: process.env.TURSO_DATABASE_URL ?? "",
