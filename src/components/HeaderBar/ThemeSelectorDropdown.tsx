@@ -56,7 +56,7 @@ const ThemeSelectorDropdown = ({
   }, []);
 
   return (
-    <div className="ml-4 flex items-center">
+    <div className="ml-4 flex items-center z-100">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <img

@@ -6,12 +6,13 @@ const FETCH_URL =
     ? "http://localhost:3000/api/games"
     : "/api/games";
 
-type GameType = {
+export type GameType = {
   game_id: string;
   game_title: string;
   platform: string;
   completion_date: string;
   notes?: string;
+  game_cover?: string;
 };
 
 const GameLog = () => {
@@ -36,18 +37,14 @@ const GameLog = () => {
   }, []);
 
   return (
-    <div className="flex flex-wrap justify-center gap-10">
-      {gameList &&
-        gameList.map((game) => (
-          <GameCard
-            key={game.game_id}
-            id={game.game_id}
-            gameTitle={game.game_title}
-            platform={game.platform}
-            completionDate={game.completion_date}
-            notes={game.notes}
-          />
-        ))}
+    <div>
+      <div className="flex flex-wrap flex-col items-center justify-center gap-10">
+        <h1 className="text-4xl underline underline-offset-5">
+          The Completion Hall
+        </h1>
+        <GameCard gameList={gameList} />
+        <h1 className="text-xl">Total Games: {gameList.length}</h1>
+      </div>
     </div>
   );
 };
