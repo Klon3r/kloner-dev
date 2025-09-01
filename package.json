@@ -23,6 +23,7 @@
     "@vercel/node": "^5.1.14",
     "@vercel/static-build": "^2.7.6",
     "class-variance-authority": "^0.7.1",
+    "embla-carousel-react": "^8.6.0",
     "lucide-react": "^0.536.0",
     "postcss": "^8.5.3",
     "react": "^19.0.0",
