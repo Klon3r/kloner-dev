@@ -1,5 +1,5 @@
 import { GameType } from "@/pages/GameLog";
-import { Card, CardHeader } from "../ui/card";
+import { Card, CardDescription, CardHeader } from "../ui/card";
 import {
   Carousel,
   CarouselContent,
@@ -57,6 +57,8 @@ const GameCard = ({ gameList }: GameCardType) => {
                 <GameCardHoverState
                   gameTitle={game.game_title}
                   completionDate={game.completion_date}
+                  platform={game.platform}
+                  notes={game.notes}
                 />
               )}
             </Card>
@@ -72,18 +74,43 @@ const GameCard = ({ gameList }: GameCardType) => {
 type GameCardHoverInfoType = {
   gameTitle: string;
   completionDate: string;
+  platform: string;
+  notes?: string;
 };
 
 const GameCardHoverState = ({
   gameTitle,
   completionDate,
+  platform,
+  notes,
 }: GameCardHoverInfoType) => {
   const formattedDate = new Date(completionDate).toLocaleDateString();
 
   return (
-    <div className="absolute w-full">
-      <CardHeader className="w-full pt-5 text-2xl">{gameTitle}</CardHeader>
-      <CardHeader className="w-full pt-5 text-xl">{formattedDate}</CardHeader>
+    <div className="absolute w-full flex flex-col h-full justify-between">
+      <div>
+        <CardHeader className="w-full pt-3 pl-4 text-2xl">
+          {gameTitle}
+        </CardHeader>
+      </div>
+      <div className="pb-10">
+        <CardHeader className="w-full pl-4 text-xl">Platform</CardHeader>
+        <CardDescription className="w-full pl-6 text-lg flex- flex-wrap">
+          {platform}
+        </CardDescription>
+        <CardHeader className="w-full pt-1 pl-4 text-xl">Finished</CardHeader>
+        <CardDescription className="w-full pl-6 text-lg flex- flex-wrap">
+          {formattedDate}
+        </CardDescription>
+        {notes && (
+          <>
+            <CardHeader className="w-full pt-1 pl-4 text-xl">Notes</CardHeader>
+            <CardDescription className="w-full pl-6 text-lg flex- flex-wrap">
+              {notes}
+            </CardDescription>
+          </>
+        )}
+      </div>
     </div>
   );
 };
