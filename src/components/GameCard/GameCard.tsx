@@ -7,7 +7,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "../ui/carousel";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 
 type GameCardType = {
@@ -17,23 +17,38 @@ type GameCardType = {
 const GameCard = ({ gameList }: GameCardType) => {
   const [hoverOver, setHoverOver] = useState(false);
   const [cardClicked, setCardClicked] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  const checkMobileDevice = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
 
   const gameCardHover = () => {
-    setHoverOver(true);
+    if (!isMobile) setHoverOver(true);
   };
 
   const gameCardHoverOut = () => {
-    setHoverOver(false);
+    if (!isMobile) setHoverOver(false);
   };
 
   const gameCardClick = () => {
-    setCardClicked((prev) => !prev);
-    if (cardClicked == false) {
-      setHoverOver(false);
+    if (isMobile) {
+      setCardClicked((prev) => !prev);
     }
+    // if (cardClicked == false) {
+    //   setHoverOver(false);
+    // }
   };
 
   const showBackOfCard = hoverOver || cardClicked;
+
+  // Check for mobile sizing
+  useEffect(() => {
+    window.addEventListener("resize", checkMobileDevice);
+    return () => {
+      window.removeEventListener("resize", checkMobileDevice);
+    };
+  }, []);
 
   return (
     <Carousel className="w-full max-w-xs ">
@@ -65,8 +80,12 @@ const GameCard = ({ gameList }: GameCardType) => {
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious className="hover:scale-105" />
-      <CarouselNext className="hover:scale-105" />
+      <div onClick={() => setCardClicked(false)}>
+        <CarouselPrevious className="hover:scale-105" />
+      </div>
+      <div onClick={() => setCardClicked(false)}>
+        <CarouselNext className="hover:scale-105" />
+      </div>
     </Carousel>
   );
 };
