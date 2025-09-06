@@ -30,6 +30,7 @@ const Homepage = () => {
         cardImage={timerImage}
         description="Start a countdown and get notified the moment it finishes"
         url="/timer"
+        newCard
       />
     </div>
   );
