@@ -9,6 +9,12 @@ import {
 import { useEffect, useState } from "react";
 import { convertMinutesToSeconds } from "../../utils/time";
 import timerIcon from "../..//assets/icons/timer.png";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Timer = () => {
   const [minute, setMinute] = useState(30);
@@ -20,6 +26,11 @@ const Timer = () => {
   const [countdownStarted, setCountdownStarted] = useState(false);
   const [countdownFinished, setCountdownFinished] = useState(false);
   const [countdownPause, setCountdownPause] = useState(false);
+
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 720);
+  const checkMobileDevice = () => {
+    setIsMobile(window.innerWidth < 720);
+  };
 
   const sendNotification = () => {
     if ("Notification" in window && Notification.permission === "granted") {
@@ -104,6 +115,13 @@ const Timer = () => {
   }, [countdownStarted, timeRemaining, countdownFinished, countdownPause]);
 
   useEffect(() => {
+    window.addEventListener("resize", checkMobileDevice);
+    return () => {
+      window.removeEventListener("resize", checkMobileDevice);
+    };
+  }, []);
+
+  useEffect(() => {
     if ("Notification" in window && Notification.permission == "default") {
       Notification.requestPermission();
     }
@@ -143,6 +161,26 @@ const Timer = () => {
           RESET
         </button>
       </div>
+      {!isMobile && (
+        <div className="pt-5">
+          <Accordion type="single" className="w-full" collapsible>
+            <AccordionItem value="help-accordion">
+              <AccordionTrigger className="hover:underline">
+                Additional Information
+              </AccordionTrigger>
+              <AccordionContent className="flex flex-col text-balance gap-1">
+                <div>
+                  <strong>Keyboard Shortcuts</strong>
+                </div>
+                <div>
+                  • <span className="text-primary">[Shift + Click]</span>:
+                  Add/Minus one minute
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        </div>
+      )}
     </div>
   );
 };
