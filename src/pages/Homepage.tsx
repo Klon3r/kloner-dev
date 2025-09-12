@@ -3,6 +3,7 @@ import clsx from "clsx";
 import ContentCard from "../components/ContentCard/ContentCard";
 
 import timerImage from "../assets/cards/timer.png";
+import gameLogImage from "../assets/cards/game-log.png";
 
 const Homepage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -26,11 +27,17 @@ const Homepage = () => {
       )}
     >
       <ContentCard
+        title="The Completion Hall"
+        cardImage={gameLogImage}
+        description="My personal gaming log with completion dates, platforms, and notes"
+        url="/games"
+        newCard
+      />
+      <ContentCard
         title="Countdown"
         cardImage={timerImage}
         description="Start a countdown and get notified the moment it finishes"
         url="/timer"
-        newCard
       />
     </div>
   );
