@@ -22,7 +22,7 @@ const ContentCard = ({
 
   return (
     <Card
-      className="w-full max-w-sm border-primary hover:scale-105 transition-all duration-300 bg-slate-50 dark:bg-zinc-900"
+      className="w-full max-w-sm border-primary hover:scale-105 transition-all duration-300 bg-slate-50 dark:bg-zinc-900 rounded-2xl border-2"
       onClick={cardClick}
     >
       <CardHeader>
