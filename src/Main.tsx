@@ -7,6 +7,7 @@ import Homepage from "./pages/Homepage";
 import Timer from "./pages/Timer/Timer";
 import HeaderBar from "./components/HeaderBar/HeaderBar";
 import GameLog from "./pages/GameLog";
+import TerminalKlone from "./pages/TerminalKlone";
 
 const router = createBrowserRouter([
   {
@@ -36,6 +37,16 @@ const router = createBrowserRouter([
       <>
         <HeaderBar />
         <GameLog />
+      </>
+    ),
+  },
+  {
+    // Terminal Klone
+    path: "/terminal",
+    element: (
+      <>
+        <HeaderBar />
+        <TerminalKlone />
       </>
     ),
   },
