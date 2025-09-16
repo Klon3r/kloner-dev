@@ -35,9 +35,6 @@ const GameCard = ({ gameList }: GameCardType) => {
     if (isMobile) {
       setCardClicked((prev) => !prev);
     }
-    // if (cardClicked == false) {
-    //   setHoverOver(false);
-    // }
   };
 
   const showBackOfCard = hoverOver || cardClicked;
@@ -106,25 +103,25 @@ const GameCardHoverState = ({
   const formattedDate = new Date(completionDate).toLocaleDateString();
 
   return (
-    <div className="absolute w-full flex flex-col h-full justify-between">
+    <div className="absolute w-full flex flex-col h-full justify-between transition-opacity duration-00 delay-500">
       <div>
         <CardHeader className="w-full pt-3 pl-4 text-2xl">
           {gameTitle}
         </CardHeader>
       </div>
       <div className="pb-10">
-        <CardHeader className="w-full pl-4 text-xl">Platform</CardHeader>
-        <CardDescription className="w-full pl-6 text-lg flex- flex-wrap">
+        <CardHeader className="pt-1 pl-2 text-xl">Platform</CardHeader>
+        <CardDescription className="px-2 text-lg flex flex-wrap">
           {platform}
         </CardDescription>
-        <CardHeader className="w-full pt-1 pl-4 text-xl">Finished</CardHeader>
-        <CardDescription className="w-full pl-6 text-lg flex- flex-wrap">
+        <CardHeader className="pt-1 pl-2 text-xl">Finished</CardHeader>
+        <CardDescription className="px-2 text-lg flex flex-wrap">
           {formattedDate}
         </CardDescription>
         {notes && (
           <>
-            <CardHeader className="w-full pt-1 pl-4 text-xl">Notes</CardHeader>
-            <CardDescription className="w-full pl-6 text-lg flex- flex-wrap">
+            <CardHeader className="pt-1 pl-2 text-xl">Notes</CardHeader>
+            <CardDescription className="px-2 text-lg flex flex-wrap break-keep">
               {notes}
             </CardDescription>
           </>
