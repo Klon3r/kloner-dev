@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { FileSystemClass } from "./FileSytem";
+import clsx from "clsx";
 
 type TerminalType = {
   user: string;
   currentDir: string;
   commandList: string[];
   callbackFunction: (command: string) => void;
+  fileSystem: FileSystemClass;
 };
 
 const Terminal = ({
@@ -12,9 +15,11 @@ const Terminal = ({
   currentDir,
   commandList,
   callbackFunction,
+  fileSystem,
 }: TerminalType) => {
   const [inputText, setInputText] = useState("");
   const [outputText, setOutputText] = useState("");
+  const [outputTextColor, setOutputTextColor] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -37,10 +42,21 @@ const Terminal = ({
       if (command === "help") {
         setOutputText(commandList.join(", "));
       }
+      if (command === "ls") {
+        const listOfDirectories = fileSystem.listOfCurrentDirectory;
+        setOutputTextColor(true);
+        setOutputText(listOfDirectories.join(" "));
+      }
     }
     callbackFunction(command);
     setReadOnly(true);
   };
+
+  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    if (!readOnly) e.target.focus();
+  };
+
+  useEffect(() => {}, []);
 
   return (
     <div>
@@ -58,9 +74,13 @@ const Terminal = ({
           value={inputText}
           autoComplete="off"
           readOnly={readOnly}
+          autoFocus={!readOnly}
+          onBlur={(e) => handleOnBlur(e)}
         />
       </div>
-      <span>{outputText}</span>
+      <span className={clsx(outputTextColor ? "text-primary" : "")}>
+        {outputText}
+      </span>
     </div>
   );
 };

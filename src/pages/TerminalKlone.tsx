@@ -1,14 +1,48 @@
+import { FileSystemClass } from "@/components/TerminalKlone/FileSytem";
 import Terminal from "@/components/TerminalKlone/Terminal";
 import { useEffect, useState } from "react";
 
 const TerminalKlone = () => {
   const user = "terminal@kloner-dev";
   const initDir = "~";
-  const commandList: string[] = ["clear", "help"];
+  const commandList: string[] = ["clear", "help", "ls"];
 
   const [currentDir, setCurrentDir] = useState("");
+
+  const initialDirectories: string[][] = [
+    [
+      "/",
+      "bin",
+      "dev",
+      "home",
+      "lib64",
+      "opt",
+      "root",
+      "sbin",
+      "sys",
+      "usr",
+      "boot",
+      "etc",
+      "lib",
+      "mnt",
+      "proc",
+      "run",
+      "srv",
+      "tmp",
+      "var",
+    ],
+    ["home", "kloner-dev"],
+    ["~", "Documents", "Downloads", "Music", "Pictures", "Videos"],
+  ];
+
   const [terminals, setTerminals] = useState<number[]>([1]);
   const [terminalCounter, setTerminalCounter] = useState(1);
+
+  // FileSystem class
+  const FileSystem = new FileSystemClass({
+    currentDirectory: currentDir,
+    listOfDirectories: initialDirectories,
+  });
 
   const callbackFunction = (command: string) => {
     if (command === "clear") {
@@ -41,6 +75,7 @@ const TerminalKlone = () => {
           currentDir={currentDir}
           commandList={commandList}
           callbackFunction={callbackFunction}
+          fileSystem={FileSystem}
         />
       ))}
     </div>
