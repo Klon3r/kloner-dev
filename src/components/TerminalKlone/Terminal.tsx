@@ -1,12 +1,13 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FileSystemClass } from "./FileSytem";
 import clsx from "clsx";
+import { ls } from "./Commands";
 
 type TerminalType = {
   user: string;
   currentDir: string;
   commandList: string[];
-  callbackFunction: (command: string) => void;
+  callbackFunction: (command: string, directory: string) => void;
   fileSystem: FileSystemClass;
 };
 
@@ -35,28 +36,26 @@ const Terminal = ({
     }
   };
 
+  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
+    if (!readOnly) e.target.focus();
+  };
+
   const handleCommand = (command: string) => {
-    if (!commandList.includes(command)) {
+    const commandSplit = command.split(" ");
+
+    if (!commandList.includes(commandSplit[0])) {
       setOutputText(`command not found: ${command}`);
     } else {
       if (command === "help") {
         setOutputText(commandList.join(", "));
       }
       if (command === "ls") {
-        const listOfDirectories = fileSystem.listOfCurrentDirectory;
-        setOutputTextColor(true);
-        setOutputText(listOfDirectories.join(" "));
+        ls(fileSystem, setOutputText, setOutputTextColor);
       }
     }
-    callbackFunction(command);
+    callbackFunction(command, fileSystem.currentDirectory);
     setReadOnly(true);
   };
-
-  const handleOnBlur = (e: React.FocusEvent<HTMLInputElement, Element>) => {
-    if (!readOnly) e.target.focus();
-  };
-
-  useEffect(() => {}, []);
 
   return (
     <div>
