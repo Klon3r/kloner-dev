@@ -9,6 +9,8 @@ type TerminalType = {
   commandList: string[];
   callbackFunction: (command: string, directory: string) => void;
   fileSystem: FileSystemClass;
+  setPrevInputList: React.Dispatch<React.SetStateAction<string[]>>;
+  prevInputList: string[];
 };
 
 const Terminal = ({
@@ -17,11 +19,14 @@ const Terminal = ({
   commandList,
   callbackFunction,
   fileSystem,
+  setPrevInputList,
+  prevInputList,
 }: TerminalType) => {
-  const [inputText, setInputText] = useState("");
+  const [inputText, setInputText] = useState<string>("");
   const [outputText, setOutputText] = useState("");
   const [outputTextColor, setOutputTextColor] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
+  const [listCounter, setListCounter] = useState<number>(prevInputList.length);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -32,7 +37,14 @@ const Terminal = ({
   const handleInputKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     const keyPressed = e.key;
     if (keyPressed === "Enter") {
+      setPrevInputList((array) => [...array, inputText]);
       handleCommand(inputText);
+    }
+    if (keyPressed === "ArrowUp") {
+      upArrowPrevInputList(e.target as HTMLInputElement);
+    }
+    if (keyPressed === "ArrowDown") {
+      downArrowPrevInputList(e.target as HTMLInputElement);
     }
   };
 
@@ -55,6 +67,36 @@ const Terminal = ({
     }
     callbackFunction(command, fileSystem.currentDirectory);
     setReadOnly(true);
+  };
+
+  const upArrowPrevInputList = (e: HTMLInputElement) => {
+    if (listCounter > 0) {
+      const newCounter = listCounter - 1;
+      setListCounter(newCounter);
+
+      const prevInputValue = prevInputList[newCounter];
+      setInputText(prevInputValue);
+
+      // Move the cursor the end of the input
+      setTimeout(() => {
+        e.setSelectionRange(e.value.length, e.value.length);
+      }, 0);
+    }
+  };
+
+  const downArrowPrevInputList = (e: HTMLInputElement) => {
+    if (listCounter < prevInputList.length - 1) {
+      const newCounter = listCounter + 1;
+      setListCounter(newCounter);
+
+      const prevInputValue = prevInputList[newCounter];
+      setInputText(prevInputValue);
+
+      // Move the cursor the end of the input
+      setTimeout(() => {
+        e.setSelectionRange(e.value.length, e.value.length);
+      }, 0);
+    }
   };
 
   return (

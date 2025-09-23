@@ -4,14 +4,14 @@ import Terminal from "@/components/TerminalKlone/Terminal";
 import { useEffect, useState } from "react";
 
 const TerminalKlone = () => {
-  const user = "terminal@kloner-dev";
-  const initDir = "~";
-  const commandList: string[] = ["clear", "help", "ls"];
-
   const [currentDir, setCurrentDir] = useState("");
-
   const [terminals, setTerminals] = useState<number[]>([1]);
   const [terminalCounter, setTerminalCounter] = useState(1);
+  const [prevInputList, setPrevInputList] = useState<string[]>([]);
+
+  const user = "terminal@kloner-dev";
+  const initDir = "~";
+  const commandList = ["clear", "help", "ls"];
 
   // FileSystem class
   const FileSystem = new FileSystemClass({
@@ -52,6 +52,8 @@ const TerminalKlone = () => {
           commandList={commandList}
           callbackFunction={callbackFunction}
           fileSystem={FileSystem}
+          setPrevInputList={setPrevInputList}
+          prevInputList={prevInputList}
         />
       ))}
     </div>
