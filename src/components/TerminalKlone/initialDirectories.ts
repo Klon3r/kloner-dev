@@ -6,7 +6,15 @@ export const initialDirectories: FileSystemNode = {
   "/": {
     bin: {},
     dev: {},
-    home: {},
+    home: {
+      kloner: {
+        Documents: {},
+        Downloads: {},
+        Music: {},
+        Pictures: {},
+        Videos: {},
+      },
+    },
     lib64: {},
     opt: {},
     root: {},
@@ -22,15 +30,5 @@ export const initialDirectories: FileSystemNode = {
     srv: {},
     tmp: {},
     var: {},
-  },
-  home: {
-    "kloner-dev": {},
-  },
-  "~": {
-    Documents: {},
-    Downloads: {},
-    Music: {},
-    Pictures: {},
-    Videos: {},
   },
 };

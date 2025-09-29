@@ -1,41 +1,39 @@
-import { FileSystemClass } from "@/components/TerminalKlone/FileSytem";
+import { FileSystemClass } from "@/components/TerminalKlone/FileSystem";
 import { initialDirectories } from "@/components/TerminalKlone/initialDirectories";
 import Terminal from "@/components/TerminalKlone/Terminal";
-import { useEffect, useState } from "react";
+import { useRef, useState } from "react";
 
 const TerminalKlone = () => {
-  const [currentDir, setCurrentDir] = useState("");
   const [terminals, setTerminals] = useState<number[]>([1]);
   const [terminalCounter, setTerminalCounter] = useState(1);
   const [prevInputList, setPrevInputList] = useState<string[]>([]);
 
-  const user = "terminal@kloner-dev";
-  const initDir = "~";
-  const commandList = ["clear", "help", "ls"];
+  // init FileSystem
+  const fileSystemRef = useRef(
+    new FileSystemClass({
+      currentDirectory: "kloner",
+      listOfDirectories: initialDirectories,
+      fullPath: "home/kloner",
+    })
+  );
 
-  // FileSystem class
-  const FileSystem = new FileSystemClass({
-    currentDirectory: currentDir,
-    listOfDirectories: initialDirectories,
-  });
-
-  const callbackFunction = (command: string, currentDir: string) => {
+  const callbackFunction = (command: string) => {
     if (command === "clear") {
-      const newId = terminalCounter + 1;
-      setTerminals([newId]);
-      setTerminalCounter(newId);
-      setCurrentDir(initDir);
+      resetFileSystemClass();
     } else {
-      setCurrentDir(currentDir);
       setTerminals((prev) => [...prev, terminalCounter + 1]);
       setTerminalCounter((prev) => prev + 1);
     }
   };
 
-  // Init page load
-  useEffect(() => {
-    setCurrentDir(initDir);
-  }, []);
+  const resetFileSystemClass = () => {
+    fileSystemRef.current.fullPath = "/home/kloner";
+    fileSystemRef.current.currentDirectory = "kloner";
+
+    const newId = terminalCounter + 1;
+    setTerminals([newId]);
+    setTerminalCounter(newId);
+  };
 
   return (
     <div className="font-mono text-lg container px-5">
@@ -47,11 +45,9 @@ const TerminalKlone = () => {
       {terminals.map((terminalId) => (
         <Terminal
           key={terminalId}
-          user={user}
-          currentDir={currentDir}
-          commandList={commandList}
+          id={terminalId}
           callbackFunction={callbackFunction}
-          fileSystem={FileSystem}
+          fileSystem={fileSystemRef.current}
           setPrevInputList={setPrevInputList}
           prevInputList={prevInputList}
         />

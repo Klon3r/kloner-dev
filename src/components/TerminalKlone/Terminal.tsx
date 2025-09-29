@@ -1,32 +1,29 @@
 import { useState } from "react";
-import { FileSystemClass } from "./FileSytem";
+import { FileSystemClass } from "./FileSystem";
 import clsx from "clsx";
-import { ls } from "./Commands";
+import { cd, commandList, ls } from "./Commands";
 
 type TerminalType = {
-  user: string;
-  currentDir: string;
-  commandList: string[];
-  callbackFunction: (command: string, directory: string) => void;
+  callbackFunction: (command: string) => void;
   fileSystem: FileSystemClass;
   setPrevInputList: React.Dispatch<React.SetStateAction<string[]>>;
   prevInputList: string[];
+  id: number;
 };
 
 const Terminal = ({
-  user,
-  currentDir,
-  commandList,
   callbackFunction,
   fileSystem,
   setPrevInputList,
   prevInputList,
+  id,
 }: TerminalType) => {
   const [inputText, setInputText] = useState<string>("");
   const [outputText, setOutputText] = useState("");
   const [outputTextColor, setOutputTextColor] = useState(false);
   const [readOnly, setReadOnly] = useState(false);
   const [listCounter, setListCounter] = useState<number>(prevInputList.length);
+  const [terminalCurrentDir] = useState(fileSystem.currentDirectory);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -62,10 +59,23 @@ const Terminal = ({
         setOutputText(commandList.join(", "));
       }
       if (command === "ls") {
-        ls(fileSystem, setOutputText, setOutputTextColor);
+        ls({ fileSystem, setOutputText, setOutputTextColor });
+      }
+      if (commandSplit[0] === "cd") {
+        if (commandSplit.length > 2) {
+          setOutputText("cd: too many arguments");
+        } else {
+          const changeDirectory = cd({
+            fileSystem,
+            directory: commandSplit[1],
+          });
+          if (changeDirectory === false) {
+            setOutputText(`cd: no such file or directory: ${commandSplit[1]}`);
+          }
+        }
       }
     }
-    callbackFunction(command, fileSystem.currentDirectory);
+    callbackFunction(command);
     setReadOnly(true);
   };
 
@@ -103,12 +113,13 @@ const Terminal = ({
     <div>
       <div>
         <span>
-          {user} {currentDir}
+          {"terminal@kloner"}{" "}
+          {terminalCurrentDir === "kloner" ? "~" : terminalCurrentDir}
           {" $ "}
         </span>
         <input
           type="text"
-          id="terminal-input"
+          id={`terminal-${id}`}
           className="focus:border-0 focus:outline-0"
           onChange={(e) => handleInputChange(e)}
           onKeyDown={(e) => handleInputKeyPress(e)}
