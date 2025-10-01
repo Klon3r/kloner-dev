@@ -103,7 +103,7 @@ const GameCardHoverState = ({
   const formattedDate = new Date(completionDate).toLocaleDateString();
 
   return (
-    <div className="absolute w-full flex flex-col h-full justify-between transition-opacity duration-00 delay-500">
+    <div className="absolute w-80 flex flex-col h-full justify-between transition-opacity duration-00 delay-500">
       <div>
         <CardHeader className="w-full pt-3 pl-4 text-2xl">
           {gameTitle}
