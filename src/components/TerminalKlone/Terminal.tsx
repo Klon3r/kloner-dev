@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { FileSystemClass } from "./FileSystem";
 import clsx from "clsx";
-import { cd, commandList, ls } from "./Commands";
+import { runCommand } from "./Commands";
 
 type TerminalType = {
   callbackFunction: (command: string) => void;
@@ -50,31 +50,7 @@ const Terminal = ({
   };
 
   const handleCommand = (command: string) => {
-    const commandSplit = command.split(" ");
-
-    if (!commandList.includes(commandSplit[0])) {
-      setOutputText(`command not found: ${command}`);
-    } else {
-      if (command === "help") {
-        setOutputText(commandList.join(", "));
-      }
-      if (command === "ls") {
-        ls({ fileSystem, setOutputText, setOutputTextColor });
-      }
-      if (commandSplit[0] === "cd") {
-        if (commandSplit.length > 2) {
-          setOutputText("cd: too many arguments");
-        } else {
-          const changeDirectory = cd({
-            fileSystem,
-            directory: commandSplit[1],
-          });
-          if (changeDirectory === false) {
-            setOutputText(`cd: no such file or directory: ${commandSplit[1]}`);
-          }
-        }
-      }
-    }
+    runCommand({ command, fileSystem, setOutputText, setOutputTextColor });
     callbackFunction(command);
     setReadOnly(true);
   };
