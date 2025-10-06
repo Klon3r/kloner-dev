@@ -17,21 +17,18 @@ type HandleCommandType = {
 
 type CommandArgKeyType = keyof typeof COMMAND_ARGS;
 
-export const COMMAND_LIST = ["clear", "help", "ls", "cd"];
+const COMMAND_LIST = ["clear", "help", "ls", "cd", "mkdir"];
 
 const COMMAND_ARGS = {
   clear: { maxArgs: 0 },
   help: { maxArgs: 0 },
   ls: { maxArgs: 0 },
   cd: { maxArgs: 1 },
+  mkdir: { maxArgs: 1 },
 } as const;
 
 /** List the contents of the current directory */
-export const ls = ({
-  fileSystem,
-  setOutputText,
-  setOutputTextColor,
-}: CommandType) => {
+const ls = ({ fileSystem, setOutputText, setOutputTextColor }: CommandType) => {
   const directoryContents = fileSystem.getCurrentDirectoryContents;
   const directoryNames = directoryContents.join(" ");
 
@@ -42,7 +39,7 @@ export const ls = ({
 /** Change the current directory
  * @returns false if directory doesn't exit
  */
-export const cd = ({ fileSystem, directory, setOutputText }: CommandType) => {
+const cd = ({ fileSystem, directory, setOutputText }: CommandType) => {
   if (directory !== undefined) {
     const changeDirectory = fileSystem.changeDirectory?.(directory);
     if (!changeDirectory && setOutputText)
@@ -50,6 +47,24 @@ export const cd = ({ fileSystem, directory, setOutputText }: CommandType) => {
   }
 };
 
+/**
+ * Create a new folder in the current directory
+ */
+const mkdir = ({ fileSystem, newDirectory, setOutputText }: CommandType) => {
+  if (newDirectory !== undefined) {
+    // Check for directory
+    const createFolder = fileSystem.createDirectory(newDirectory);
+    if (!createFolder && setOutputText) {
+      setOutputText(
+        `mkdir: cannot create directory '${newDirectory}' already exists`
+      );
+    }
+  }
+};
+
+/**
+ * Determines what command needs to be run based on the user input
+ */
 export const runCommand = ({
   command,
   fileSystem,
@@ -77,9 +92,16 @@ export const runCommand = ({
       break;
     case "cd":
       cd({ fileSystem, directory: commandSuffix, setOutputText });
+      break;
+    case "mkdir":
+      mkdir({ fileSystem, newDirectory: commandSuffix, setOutputText });
+      break;
   }
 };
 
+/**
+ * Check that the command does not have too many/little arguments
+ */
 const commandArgCheck = (
   commandLength: number,
   commandPrefix: string,

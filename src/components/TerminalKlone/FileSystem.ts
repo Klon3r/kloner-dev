@@ -19,10 +19,18 @@ export class FileSystemClass {
 
   /** Return the current directory contents */
   get getCurrentDirectoryContents(): string[] {
+    const currentDirObj = this.getCurrentDirectoryObject;
+    return Object.keys(currentDirObj);
+  }
+
+  /** Return the current directory object
+   * @returns {FileSystemNode} The directory object of the current directory or empty object if path is not found
+   */
+  get getCurrentDirectoryObject(): FileSystemNode {
     let currentObj = this.listOfDirectories;
 
     if (this.currentDirectory === "/") {
-      return Object.keys(currentObj["/"]);
+      return currentObj;
     }
 
     const pathParts = this.fullPath.split("/").filter((path) => path !== "");
@@ -32,12 +40,11 @@ export class FileSystemClass {
       if (currentObj && currentObj[part]) {
         currentObj = currentObj[part];
       } else {
-        // Cannot find directory
-        return [];
+        return {};
       }
     }
 
-    return Object.keys(currentObj);
+    return currentObj;
   }
 
   /**
@@ -84,6 +91,23 @@ export class FileSystemClass {
       } else {
         return false;
       }
+    }
+  }
+
+  /**
+   * Create a new folder in the current directory
+   */
+  createDirectory(newDirectory: string) {
+    const currentDirObj = this.getCurrentDirectoryObject;
+    const currentObjKeys = Object.keys(currentDirObj);
+
+    if (currentObjKeys.includes(newDirectory)) {
+      // Directory exists
+      return false;
+    } else {
+      // Create new directory
+      this.getCurrentDirectoryObject[newDirectory] = {};
+      return true;
     }
   }
 }
