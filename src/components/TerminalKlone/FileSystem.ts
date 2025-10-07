@@ -81,15 +81,12 @@ export class FileSystemClass {
 
     if (directory === "..") {
       this.currentDirectory = this.goUpOneDirectory();
-      return true;
     } else {
       if (currentDirectoryList.includes(directory)) {
         this.addToFullPath(directory);
         this.currentDirectory = directory;
-
-        return true;
       } else {
-        return false;
+        return `cd: no such file or directory: ${directory}`;
       }
     }
   }
@@ -102,12 +99,27 @@ export class FileSystemClass {
     const currentObjKeys = Object.keys(currentDirObj);
 
     if (currentObjKeys.includes(newDirectory)) {
-      // Directory exists
-      return false;
+      return `mkdir: cannot create directory '${newDirectory}' already exists`;
     } else {
       // Create new directory
       this.getCurrentDirectoryObject[newDirectory] = {};
-      return true;
+    }
+  }
+
+  deleteDirectory(directory: string) {
+    const currentDirObj = this.getCurrentDirectoryObject;
+    const currentObjKeys = Object.keys(currentDirObj);
+
+    if (currentObjKeys.includes(directory)) {
+      // Check if directory is empty
+      const directoryKeys = Object.keys(currentDirObj[directory]);
+      if (directoryKeys.length === 0) {
+        delete this.getCurrentDirectoryObject[directory];
+      } else {
+        return `rm: cannot remove '${directory}' not empty`;
+      }
+    } else {
+      return `rm: directory '${directory}' doesn't exist`;
     }
   }
 }

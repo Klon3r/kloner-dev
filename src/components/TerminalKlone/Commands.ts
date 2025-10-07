@@ -17,7 +17,7 @@ type HandleCommandType = {
 
 type CommandArgKeyType = keyof typeof COMMAND_ARGS;
 
-const COMMAND_LIST = ["clear", "help", "ls", "cd", "mkdir"];
+const COMMAND_LIST = ["clear", "help", "ls", "cd", "mkdir", "rm"];
 
 const COMMAND_ARGS = {
   clear: { maxArgs: 0 },
@@ -25,6 +25,7 @@ const COMMAND_ARGS = {
   ls: { maxArgs: 0 },
   cd: { maxArgs: 1 },
   mkdir: { maxArgs: 1 },
+  rm: { maxArgs: 1 },
 } as const;
 
 /** List the contents of the current directory */
@@ -42,8 +43,7 @@ const ls = ({ fileSystem, setOutputText, setOutputTextColor }: CommandType) => {
 const cd = ({ fileSystem, directory, setOutputText }: CommandType) => {
   if (directory !== undefined) {
     const changeDirectory = fileSystem.changeDirectory?.(directory);
-    if (!changeDirectory && setOutputText)
-      setOutputText(`cd: no such file or directory: ${directory}`);
+    setOutputText?.(changeDirectory ?? "");
   }
 };
 
@@ -52,13 +52,15 @@ const cd = ({ fileSystem, directory, setOutputText }: CommandType) => {
  */
 const mkdir = ({ fileSystem, newDirectory, setOutputText }: CommandType) => {
   if (newDirectory !== undefined) {
-    // Check for directory
-    const createFolder = fileSystem.createDirectory(newDirectory);
-    if (!createFolder && setOutputText) {
-      setOutputText(
-        `mkdir: cannot create directory '${newDirectory}' already exists`
-      );
-    }
+    const createFolderReturn = fileSystem.createDirectory(newDirectory);
+    setOutputText?.(createFolderReturn ?? "");
+  }
+};
+
+const rm = ({ fileSystem, directory, setOutputText }: CommandType) => {
+  if (directory !== undefined) {
+    const deleteFolderReturn = fileSystem.deleteDirectory(directory);
+    setOutputText?.(deleteFolderReturn ?? "");
   }
 };
 
@@ -95,6 +97,13 @@ export const runCommand = ({
       break;
     case "mkdir":
       mkdir({ fileSystem, newDirectory: commandSuffix, setOutputText });
+      break;
+    case "rm":
+      rm({
+        fileSystem,
+        directory: commandSuffix,
+        setOutputText,
+      });
       break;
   }
 };
