@@ -4,6 +4,7 @@ import ContentCard from "../components/ContentCard/ContentCard";
 
 import timerImage from "../assets/cards/timer.png";
 import gameLogImage from "../assets/cards/game-log.png";
+import terminalImage from "../assets/cards/terminal.png";
 
 const Homepage = () => {
   const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
@@ -27,11 +28,17 @@ const Homepage = () => {
       )}
     >
       <ContentCard
+        title="Terminal Klone"
+        cardImage={terminalImage}
+        description="Browser-based terminal with Unix command support and directory navigation"
+        url="/terminal"
+        newCard
+      />
+      <ContentCard
         title="The Completion Hall"
         cardImage={gameLogImage}
         description="My personal gaming log with completion dates, platforms, and notes"
         url="/games"
-        newCard
       />
       <ContentCard
         title="Countdown"

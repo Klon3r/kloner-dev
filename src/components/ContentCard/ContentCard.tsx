@@ -32,7 +32,7 @@ const ContentCard = ({
           </div>
         </CardTitle>
         <CardDescription>{description}</CardDescription>
-        <img src={cardImage} className="rounded-2xl pt-2" />
+        <img src={cardImage} className="mt-2" />
       </CardHeader>
     </Card>
   );
