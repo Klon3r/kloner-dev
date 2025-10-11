@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FileSystemClass } from "./FileSystem";
 import clsx from "clsx";
 import { runCommand } from "./Commands";
@@ -24,6 +24,11 @@ const Terminal = ({
   const [readOnly, setReadOnly] = useState(false);
   const [listCounter, setListCounter] = useState<number>(prevInputList.length);
   const [terminalCurrentDir] = useState(fileSystem.currentDirectory);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  const checkMobileDevice = () => {
+    setIsMobile(window.innerWidth < 768);
+  };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value;
@@ -85,14 +90,31 @@ const Terminal = ({
     }
   };
 
+  // Check for mobile
+  useEffect(() => {
+    window.addEventListener("resize", checkMobileDevice);
+    return () => {
+      window.removeEventListener("resize", checkMobileDevice);
+    };
+  }, []);
+
+  console.log(isMobile);
+
   return (
     <div>
       <div>
-        <span>
-          {"terminal@kloner"}{" "}
-          {terminalCurrentDir === "kloner" ? "~" : terminalCurrentDir}
-          {" $ "}
-        </span>
+        {isMobile ? (
+          <span>
+            {"t@k"} {terminalCurrentDir === "kloner" ? "~" : terminalCurrentDir}
+            {" $ "}
+          </span>
+        ) : (
+          <span>
+            {"terminal@kloner"}{" "}
+            {terminalCurrentDir === "kloner" ? "~" : terminalCurrentDir}
+            {" $ "}
+          </span>
+        )}
         <input
           type="text"
           id={`terminal-${id}`}
@@ -104,6 +126,7 @@ const Terminal = ({
           readOnly={readOnly}
           autoFocus={!readOnly}
           onBlur={(e) => handleOnBlur(e)}
+          autoCapitalize="none"
         />
       </div>
       <span className={clsx(outputTextColor ? "text-primary" : "")}>
