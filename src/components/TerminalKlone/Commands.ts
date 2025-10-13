@@ -1,3 +1,4 @@
+import React from "react";
 import { FileSystemClass } from "./FileSystem";
 
 export type CommandType = {
@@ -15,17 +16,20 @@ type HandleCommandType = {
   fileSystem: FileSystemClass;
 };
 
-type CommandArgKeyType = keyof typeof COMMAND_ARGS;
+type CommandArgKeyType = keyof typeof COMMAND_INFO;
 
 const COMMAND_LIST = ["clear", "help", "ls", "cd", "mkdir", "rm"];
 
-const COMMAND_ARGS = {
-  clear: { maxArgs: 0 },
-  help: { maxArgs: 0 },
-  ls: { maxArgs: 0 },
-  cd: { maxArgs: 1 },
-  mkdir: { maxArgs: 1 },
-  rm: { maxArgs: 1 },
+const COMMAND_INFO = {
+  clear: { maxArgs: 0, helpText: "clear: clears all terminals" },
+  help: { maxArgs: 1, helpText: "help: shows the help information" },
+  ls: { maxArgs: 0, helpText: "ls: lists out the current directory" },
+  cd: {
+    maxArgs: 1,
+    helpText: "cd <directory>: changes directory to <directory>, if it exists",
+  },
+  mkdir: { maxArgs: 1, helpText: "mkdir <directory>: creates a new directory" },
+  rm: { maxArgs: 1, helpText: "rm <directory>: removes <directory> if empty" },
 } as const;
 
 /** List the contents of the current directory */
@@ -64,6 +68,26 @@ const rm = ({ fileSystem, directory, setOutputText }: CommandType) => {
   }
 };
 
+const help = (
+  commandSuffix: string,
+  setOutputText: React.Dispatch<React.SetStateAction<string>>
+) => {
+  if (commandSuffix === undefined) {
+    const outputText = `list of commands: ${COMMAND_LIST.join(
+      ", "
+    )}\nhelp <cmd>:  for more info about that command`;
+
+    setOutputText(outputText);
+    return;
+  }
+
+  commandSuffix && commandSuffix in COMMAND_INFO
+    ? setOutputText(COMMAND_INFO[commandSuffix as CommandArgKeyType].helpText)
+    : setOutputText(
+        `help ${commandSuffix}: command doesn't exist check <help> for a list`
+      );
+};
+
 /**
  * Determines what command needs to be run based on the user input
  */
@@ -87,7 +111,7 @@ export const runCommand = ({
 
   switch (commandPrefix) {
     case "help":
-      setOutputText(COMMAND_LIST.join(", "));
+      help(commandSuffix, setOutputText);
       break;
     case "ls":
       ls({ fileSystem, setOutputText, setOutputTextColor });
@@ -116,7 +140,7 @@ const commandArgCheck = (
   commandPrefix: string,
   setOutputText: React.Dispatch<React.SetStateAction<string>>
 ) => {
-  const argMapper = COMMAND_ARGS[commandPrefix as CommandArgKeyType];
+  const argMapper = COMMAND_INFO[commandPrefix as CommandArgKeyType];
   if (!argMapper) {
     setOutputText(`command not found: ${commandPrefix}`);
     return;

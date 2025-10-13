@@ -129,9 +129,11 @@ const Terminal = ({
           autoCapitalize="none"
         />
       </div>
-      <span className={clsx(outputTextColor ? "text-primary" : "")}>
-        {outputText}
-      </span>
+      <div className={clsx(outputTextColor ? "text-primary" : "")}>
+        {outputText.split("\n").map((text, index) => (
+          <div key={index}>{text}</div>
+        ))}
+      </div>
     </div>
   );
 };
