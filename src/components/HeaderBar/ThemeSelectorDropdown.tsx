@@ -56,13 +56,14 @@ const ThemeSelectorDropdown = ({
   }, []);
 
   return (
-    <div className="ml-4 flex items-center z-100">
+    <div className="ml-4 flex items-center z-100" data-testid="theme-container">
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <img
             className="hover:cursor-pointer dark:invert! w-6"
             src={isDarkMode ? sunIcon : moonIcon}
             alt={isDarkMode ? "Sun icon" : "Moon icon"}
+            data-testid="theme-selector"
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent

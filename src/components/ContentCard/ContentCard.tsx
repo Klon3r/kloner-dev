@@ -27,9 +27,9 @@ const ContentCard = ({
     >
       <CardHeader>
         <CardTitle>
-          <div className="flex flex-row gap-2">
+          <h1 className="flex flex-row gap-2">
             {title} {newCard && <ContentCardNewIcon />}
-          </div>
+          </h1>
         </CardTitle>
         <CardDescription>{description}</CardDescription>
         <img src={cardImage} className="mt-2" />
