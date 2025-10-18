@@ -32,11 +32,12 @@ const AboutMe = () => {
                   className="w-25 rounded-2xl "
                   src={mePhoto}
                   alt="Photo of Keiran"
+                  data-testid="about-me-image"
                 />
                 <AvatarFallback className="min-w-25">ME</AvatarFallback>
               </Avatar>
               <div className="flex flex-col justify-start items-start">
-                <ul>
+                <ul data-testid="about-me-list">
                   <li className="pb-1 text-lg font-bold">Keiran Bunyan</li>
                   <li className="pl-5 text-sm text-start">{currentAge}</li>
                   <li className="pl-5 text-sm text-start">He/Him</li>
@@ -50,7 +51,7 @@ const AboutMe = () => {
             </div>
           </div>
         </DialogHeader>
-        <DialogDescription className="italic">
+        <DialogDescription className="italic" data-testid="about-me-quote">
           {
             "One day I challenged myself to learn web development since I didn't know anything about it, fast forward ...well turns out that I fell in love with it."
           }
