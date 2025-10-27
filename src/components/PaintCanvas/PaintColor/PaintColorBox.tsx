@@ -18,6 +18,7 @@ const PaintColorBox = ({
   return (
     <div
       id={colorName}
+      date-testid={`${colorName}-paint-color-box`}
       style={{ backgroundColor: colorHex, width: boxSize, height: boxSize }}
       className="hover:cursor-pointer"
       onClick={() => handleClick(colorHex)}

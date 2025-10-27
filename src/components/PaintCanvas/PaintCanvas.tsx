@@ -22,7 +22,6 @@ const PaintCanvas = ({ height, width }: PaintCanvasType) => {
 
     context.beginPath();
     context.arc(x, y, 20, 0, 2 * Math.PI);
-    console.log(currentColor, "COLOR");
     context.fillStyle = currentColor;
     context.fill();
   };
