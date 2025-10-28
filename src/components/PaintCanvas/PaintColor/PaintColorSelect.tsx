@@ -7,18 +7,37 @@ type PaintColorSelectType = {
 };
 
 const PaintColorSelect = ({ setCurrentColor }: PaintColorSelectType) => {
-  const paintRow = [
+  const paintRowOne = [
+    "black #000101",
+    "dark-gray #91918e",
+    "dark-red #800101",
+    "dark-yellow #808000",
+    "dark-green #008000",
+    "dark-cyan #018180",
+    "dark-blue #010180",
+    "dark-magenta #810081",
+    "dark-lime-yellow #818140",
+    "olive #004040",
+    "dark-teal #0180fe",
+    "blue-gray #014081",
+    "dark-purple #8101ff",
+    "brown #814100",
+  ];
+
+  console.log(paintRowOne);
+
+  const paintRowTwo = [
     "white #fefffe",
     "gray #c1c1c0",
     "red #ff0000",
     "yellow #fffe01",
     "green #00ff00",
-    "teal #00fefe",
+    "cyan #00fefe",
     "blue #0101ff",
     "magenta #fe00fe",
-    "light-yellow #feff81",
-    "light-green #00ff80",
-    "light-blue #81feff",
+    "lime-yellow #feff81",
+    "blue-green #00ff80",
+    "teal #81feff",
     "purple #8282fd",
     "pink #fe0180",
     "terracotta #ff8141",
@@ -26,7 +45,7 @@ const PaintColorSelect = ({ setCurrentColor }: PaintColorSelectType) => {
 
   return (
     <div className="flex flex-row">
-      {paintRow.map((paintRowValue) => {
+      {paintRowTwo.map((paintRowValue) => {
         const paintRowSplit = paintRowValue.split(" ");
         const name = paintRowSplit[0];
         const hex = paintRowSplit[1];
