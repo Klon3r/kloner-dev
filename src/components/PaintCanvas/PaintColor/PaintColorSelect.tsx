@@ -44,20 +44,37 @@ const PaintColorSelect = ({ setCurrentColor }: PaintColorSelectType) => {
   ];
 
   return (
-    <div className="flex flex-row">
-      {paintRowTwo.map((paintRowValue) => {
-        const paintRowSplit = paintRowValue.split(" ");
-        const name = paintRowSplit[0];
-        const hex = paintRowSplit[1];
-        return (
-          <PaintColorBox
-            key={name}
-            colorHex={hex}
-            colorName={name}
-            setCurrentColor={setCurrentColor}
-          />
-        );
-      })}
+    <div className="flex flex-col">
+      <div className="flex flex-row">
+        {paintRowOne.map((paintRowValue) => {
+          const paintRowSplit = paintRowValue.split(" ");
+          const name = paintRowSplit[0];
+          const hex = paintRowSplit[1];
+          return (
+            <PaintColorBox
+              key={name}
+              colorHex={hex}
+              colorName={name}
+              setCurrentColor={setCurrentColor}
+            />
+          );
+        })}
+      </div>
+      <div className="flex flex-row">
+        {paintRowTwo.map((paintRowValue) => {
+          const paintRowSplit = paintRowValue.split(" ");
+          const name = paintRowSplit[0];
+          const hex = paintRowSplit[1];
+          return (
+            <PaintColorBox
+              key={name}
+              colorHex={hex}
+              colorName={name}
+              setCurrentColor={setCurrentColor}
+            />
+          );
+        })}
+      </div>
     </div>
   );
 };
