@@ -24,8 +24,6 @@ const PaintColorSelect = ({ setCurrentColor }: PaintColorSelectType) => {
     "brown #814100",
   ];
 
-  console.log(paintRowOne);
-
   const paintRowTwo = [
     "white #fefffe",
     "gray #c1c1c0",
