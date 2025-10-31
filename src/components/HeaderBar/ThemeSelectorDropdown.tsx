@@ -9,49 +9,31 @@ import {
   DropdownMenuRadioItem,
   DropdownMenuSeparator,
 } from "../ui/dropdown-menu";
-import moonIcon from "../../assets/icons/moon.png";
-import sunIcon from "../../assets/icons/sun.png";
+import themeIcon from "../../assets/icons/color-picker.png";
 import { useEffect, useState } from "react";
 import {
   getThemeFromLocalStorage,
   setColorTheme,
-  setDarkModeInLocalStorage,
   setThemeInLocalStorage,
 } from "@/utils/theme";
 
-type ThemeSelectorDropdownType = {
-  isDarkMode: boolean;
-  setIsDarkMode: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const ThemeSelectorDropdown = ({
-  isDarkMode,
-  setIsDarkMode,
-}: ThemeSelectorDropdownType) => {
+const ThemeSelectorDropdown = () => {
   const [colorPosition, setColorPosition] = useState(
     getThemeFromLocalStorage()
   );
   const [themeColor, setThemeColor] = useState(getThemeFromLocalStorage());
-  const [darkModePosition, setDarkModePosition] = useState(String(isDarkMode));
 
   const themeColorOnValueChange = (value: string) => {
     setColorPosition(value);
-    setColorTheme(value, isDarkMode);
+    setColorTheme(value);
     setThemeInLocalStorage(value);
-  };
-
-  const darkModeOnValueChange = (value: string) => {
-    setDarkModePosition(value);
-    setIsDarkMode(value === "true");
-    setDarkModeInLocalStorage(value);
-    setColorTheme(colorPosition, value === "true");
   };
 
   const dropdownHoverStyle =
     "hover:cursor-pointer hover:bg-primary! hover:rounded-2xl!";
 
   useEffect(() => {
-    setColorTheme(themeColor, isDarkMode);
+    setColorTheme(themeColor);
     setThemeColor(themeColor);
   }, []);
 
@@ -60,9 +42,9 @@ const ThemeSelectorDropdown = ({
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
           <img
-            className="hover:cursor-pointer dark:invert! w-6"
-            src={isDarkMode ? sunIcon : moonIcon}
-            alt={isDarkMode ? "Sun icon" : "Moon icon"}
+            className="hover:cursor-pointer dark:invert! w-6 mb-1"
+            src={themeIcon}
+            alt={"Color picker icon"}
             data-testid="theme-selector"
           />
         </DropdownMenuTrigger>
@@ -107,23 +89,6 @@ const ThemeSelectorDropdown = ({
               className={dropdownHoverStyle}
             >
               Orange
-            </DropdownMenuRadioItem>
-          </DropdownMenuRadioGroup>
-          <DropdownMenuLabel className="text-center">
-            Dark mode
-          </DropdownMenuLabel>
-          <DropdownMenuSeparator />
-          <DropdownMenuRadioGroup
-            value={darkModePosition}
-            onValueChange={(value) => {
-              darkModeOnValueChange(value);
-            }}
-          >
-            <DropdownMenuRadioItem value="true" className={dropdownHoverStyle}>
-              On
-            </DropdownMenuRadioItem>
-            <DropdownMenuRadioItem value="false" className={dropdownHoverStyle}>
-              Off
             </DropdownMenuRadioItem>
           </DropdownMenuRadioGroup>
         </DropdownMenuContent>

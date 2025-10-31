@@ -6,8 +6,6 @@ import {
   HoverCardTrigger,
 } from "../ui/hover-card";
 import { AvatarFallback, AvatarImage } from "../ui/avatar";
-import { getDarkModeFromLocalStorage } from "@/utils/theme";
-import clsx from "clsx";
 
 type CardHoverType = {
   name: string;
@@ -34,8 +32,6 @@ const CardHover = ({
   openDelay = 700, // Default from Shadcn (https://www.radix-ui.com/primitives/docs/components/hover-card#api-reference)
   closeDelay = 300, // Default from Shadcn (https://www.radix-ui.com/primitives/docs/components/hover-card#api-reference),
 }: CardHoverType) => {
-  const darkMode = getDarkModeFromLocalStorage();
-
   return (
     <HoverCard openDelay={openDelay} closeDelay={closeDelay}>
       <HoverCardTrigger asChild>
@@ -47,11 +43,7 @@ const CardHover = ({
         <div className="flex justify-between gap-4">
           <div>
             <Avatar>
-              <AvatarImage
-                src={avatarImage}
-                alt={alt}
-                className={clsx(darkMode ? "invert" : "")}
-              />
+              <AvatarImage src={avatarImage} alt={alt} className={"invert"} />
               <AvatarFallback>{avatarFallback}</AvatarFallback>
             </Avatar>
           </div>

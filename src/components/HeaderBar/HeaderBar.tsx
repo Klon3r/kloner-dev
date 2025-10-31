@@ -1,15 +1,10 @@
 import { navigateTo } from "@/utils/navigate";
 import { Separator } from "@/components/ui/separator";
 import Links from "./Links";
-import { getDarkModeFromLocalStorage } from "@/utils/theme";
 import { useEffect, useState } from "react";
 import ThemeSelectorDropdown from "./ThemeSelectorDropdown";
 
 const HeaderBar = () => {
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(() =>
-    getDarkModeFromLocalStorage()
-  );
-
   const [isMobile, setIsMobile] = useState(false);
 
   const handleLogoClick = () => {
@@ -43,10 +38,7 @@ const HeaderBar = () => {
             .dev
           </h3>
           <Links isMobile={isMobile} />
-          <ThemeSelectorDropdown
-            isDarkMode={isDarkMode}
-            setIsDarkMode={setIsDarkMode}
-          />
+          <ThemeSelectorDropdown />
         </div>
         <Separator decorative />
       </div>
