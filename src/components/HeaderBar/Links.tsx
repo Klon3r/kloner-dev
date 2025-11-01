@@ -5,7 +5,6 @@ import CardHover from "../CardHover/CardHover";
 import { Button } from "../ui/button";
 import githubIcon from "../../assets/icons/github.png";
 import AboutMe from "../AboutMe/AboutMe";
-import { linkButtonStyle } from "./Style";
 type LinksType = {
   isMobile: boolean;
 };
@@ -14,6 +13,7 @@ const Links = ({ isMobile }: LinksType) => {
   return <div>{isMobile ? <HeaderLinksMobile /> : <HeaderLinksDesktop />}</div>;
 };
 
+// Mobile Links
 const HeaderLinksMobile = () => {
   const [mobileMenuClicked, setMobileMenuClicked] = useState(false);
 
@@ -39,7 +39,7 @@ const HeaderLinksMobile = () => {
           <div>
             <Button
               variant="link"
-              className={linkButtonStyle}
+              className="dark:text-white text-black m-0 p-0 hover:text-primary! text-lg"
               onClick={handleHomeClick}
             >
               home
@@ -49,7 +49,7 @@ const HeaderLinksMobile = () => {
           <div>
             <Button
               variant="link"
-              className={linkButtonStyle}
+              className="dark:text-white text-black m-0 p-0 hover:text-primary! text-lg"
               onClick={() => navigateNewTab("https://github.com/Klon3r")}
             >
               github
@@ -65,6 +65,7 @@ const HeaderLinksMobile = () => {
   );
 };
 
+// Desktop Links
 const HeaderLinksDesktop = () => {
   const handleHomeClick = () => {
     navigateTo("/");
@@ -75,7 +76,7 @@ const HeaderLinksDesktop = () => {
       <div>
         <Button
           variant="link"
-          className={linkButtonStyle}
+          className="dark:text-white m-0 p-0 hover:text-primary! text-lg"
           onClick={handleHomeClick}
         >
           home
@@ -85,14 +86,14 @@ const HeaderLinksDesktop = () => {
       <div>
         <CardHover
           name="github"
-          buttonClassName={linkButtonStyle}
+          buttonClassName="dark:text-white m-0 p-0 hover:text-primary! text-lg"
           onClick={() => navigateNewTab("https://github.com/Klon3r")}
           heading="@Klon3r"
           text="Curious about my code? Explore my GitHub profile and see what I'm building!"
           avatarImage={githubIcon}
           avatarFallback="GH"
           alt="@github"
-          openDelay={200}
+          openDelay={150}
           closeDelay={100}
         />
       </div>

@@ -41,15 +41,21 @@ const CardHover = ({
       </HoverCardTrigger>
       <HoverCardContent className="w-80">
         <div className="flex justify-between gap-4">
-          <div>
+          <div className="flex items-end">
             <Avatar>
-              <AvatarImage src={avatarImage} alt={alt} className={"invert"} />
+              <AvatarImage
+                src={avatarImage}
+                alt={alt}
+                className={"invert h-auto w-auto"}
+              />
               <AvatarFallback>{avatarFallback}</AvatarFallback>
             </Avatar>
           </div>
           <div className="space-y-1">
-            <h4 className="text-sm font-semibold">{heading}</h4>
-            <p className="text-sm">{text}</p>
+            <h4 className="text-base font-semibold font-mono underline underline-offset-5">
+              {heading}
+            </h4>
+            <p className="text-sm font-mono">{text}</p>
           </div>
         </div>
       </HoverCardContent>

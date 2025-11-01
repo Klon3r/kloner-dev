@@ -49,7 +49,7 @@ const ThemeSelectorDropdown = () => {
           />
         </DropdownMenuTrigger>
         <DropdownMenuContent
-          className="w-30 bg-accent border-primary border-1 rounded-2xl p-2 mt-4"
+          className="w-30 bg-accent border-primary border-2 rounded-2xl p-2 mt-3"
           align="end"
         >
           <DropdownMenuLabel className="text-center">

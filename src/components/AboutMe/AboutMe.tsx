@@ -8,7 +8,6 @@ import {
 import { Button } from "../ui/button";
 import { Avatar, AvatarImage } from "@radix-ui/react-avatar";
 import { AvatarFallback } from "../ui/avatar";
-import { linkButtonStyle } from "../HeaderBar/Style";
 import mePhoto from "../../assets/me-grey.png";
 import { getAge } from "@/utils/time";
 
@@ -18,11 +17,14 @@ const AboutMe = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <Button variant="link" className={linkButtonStyle}>
+        <Button
+          variant="link"
+          className="dark:text-white text-black m-0 p-0 hover:text-primary! text-lg"
+        >
           about me
         </Button>
       </DialogTrigger>
-      <DialogContent className="sm:max-w-md">
+      <DialogContent className="sm:max-w-md font-mono">
         <DialogTitle className="font-extrabold text-lg">About Me</DialogTitle>
         <DialogHeader>
           <div className="flex flex-col flex-wrap gap-5">

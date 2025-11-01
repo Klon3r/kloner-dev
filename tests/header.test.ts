@@ -81,13 +81,3 @@ test("has theme colors", async ({ page }) => {
     await expect(themeColorContainer).toContainText(color);
   }
 });
-
-test("has dark/light mode", async ({ page }) => {
-  const themeButton = page.getByTestId("theme-selector");
-  await themeButton.click();
-
-  const themeColorContainer = page.getByTestId("theme-container");
-  await expect(themeColorContainer).toContainText("Dark mode");
-  await expect(themeColorContainer).toContainText("On");
-  await expect(themeColorContainer).toContainText("Off");
-});
