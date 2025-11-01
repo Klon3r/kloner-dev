@@ -1,5 +1,3 @@
-import clsx from "clsx";
-import { flexCenter, flexCol, textColor } from "../../StyleGlobal";
 import {
   minuteButton,
   timerButton,
@@ -128,7 +126,9 @@ const Timer = () => {
   }, []);
 
   return (
-    <div className={clsx(flexCenter, flexCol, textColor)}>
+    <div
+      className={"flex justify-center items-center flex-col dark:text-white"}
+    >
       <div>
         <button className={minuteButton} onClick={(e) => addMinutes(e)}>
           +

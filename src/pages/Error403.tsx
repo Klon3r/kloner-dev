@@ -1,10 +1,7 @@
-import clsx from "clsx";
-import { flexCenter, flexCol, textColor } from "../StyleGlobal";
-
 const Error403 = () => {
   return (
-    <div className={clsx(flexCenter, flexCol)}>
-      <h1 className={clsx(textColor, "text-lg")}>Error! page does not exist</h1>
+    <div className={"flex flex-col justify-center items-center"}>
+      <h1 className={"dark:text-white text-lg"}>Error! page does not exist</h1>
     </div>
   );
 };
