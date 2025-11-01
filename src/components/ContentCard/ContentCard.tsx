@@ -1,5 +1,6 @@
 import { navigateTo } from "@/utils/navigate";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
+import clsx from "clsx";
 
 type ContentCardType = {
   title: string;
@@ -7,6 +8,7 @@ type ContentCardType = {
   url: string;
   cardImage?: string;
   newCard?: boolean;
+  isHovered: boolean;
 };
 
 const ContentCard = ({
@@ -15,6 +17,7 @@ const ContentCard = ({
   cardImage,
   url,
   newCard,
+  isHovered,
 }: ContentCardType) => {
   const cardClick = () => {
     navigateTo(url);
@@ -22,17 +25,23 @@ const ContentCard = ({
 
   return (
     <Card
-      className="w-full max-w-sm border-primary hover:scale-105 transition-all duration-300 bg-slate-50 dark:bg-zinc-900 rounded-2xl border-2"
+      className={clsx(
+        "w-full max-w-xs min-w-xs drop-shadow-2xl border-primary hover:scale-105 transition-all duration-300 bg-slate-50 dark:bg-zinc-900 rounded-2xl border-2 hover:cursor-pointer hover:opacity-100",
+        cardImage ? "h-60" : "h-35",
+        isHovered ? "opacity-40" : "opacity-100"
+      )}
       onClick={cardClick}
     >
       <CardHeader>
         <CardTitle>
-          <h1 className="flex flex-row gap-2">
+          <h1 className="flex flex-row gap-2 h-7 text-shadow-black text-shadow-2xs text-lg">
             {title} {newCard && <ContentCardNewIcon />}
           </h1>
         </CardTitle>
-        <CardDescription>{description}</CardDescription>
-        <img src={cardImage} className="mt-2" />
+        <CardDescription className="h-15">{description}</CardDescription>
+        {cardImage && (
+          <img src={cardImage} className="mt-2 opacity-80 rounded-2xl h-20" />
+        )}
       </CardHeader>
     </Card>
   );
