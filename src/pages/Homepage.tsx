@@ -24,7 +24,7 @@ const Homepage = () => {
   return (
     <div
       className={clsx(
-        "flex gap-5 items-center mx-10 flex-wrap justify-center",
+        "flex gap-5 items-center mx-10 flex-wrap justify-center w-fit m-auto!",
         isMobile ? "flex-col" : ""
       )}
       onMouseEnter={() => setIsDivHovered(true)}
