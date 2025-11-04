@@ -1,6 +1,7 @@
 import { navigateTo } from "@/utils/navigate";
 import { Card, CardDescription, CardHeader, CardTitle } from "../ui/card";
 import clsx from "clsx";
+import { SetStateAction } from "react";
 
 type ContentCardType = {
   title: string;
@@ -9,6 +10,7 @@ type ContentCardType = {
   cardImage?: string;
   newCard?: boolean;
   isHovered: boolean;
+  setIsHovered?: React.Dispatch<SetStateAction<boolean>>;
 };
 
 const ContentCard = ({
@@ -18,9 +20,11 @@ const ContentCard = ({
   url,
   newCard,
   isHovered,
+  setIsHovered,
 }: ContentCardType) => {
   const cardClick = () => {
     navigateTo(url);
+    setIsHovered?.(false);
   };
 
   return (

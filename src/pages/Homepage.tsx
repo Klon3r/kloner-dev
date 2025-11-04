@@ -36,6 +36,7 @@ const Homepage = () => {
         description="Browser-based terminal with Unix command support and directory navigation"
         url="/terminal"
         isHovered={isDivHovered}
+        setIsHovered={setIsDivHovered}
         newCard
       />
       <ContentCard
