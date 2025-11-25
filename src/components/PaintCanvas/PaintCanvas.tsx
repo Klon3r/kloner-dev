@@ -5,6 +5,7 @@ import PaintShapeSelector from "./Components/PaintShapeSelector";
 
 import circleShape from "../../assets/icons/circle.png";
 import squareShape from "../../assets/icons/square.png";
+import pencilShape from "../../assets/icons/pencil.png";
 
 type PaintCanvasType = {
   height: number;
@@ -15,6 +16,12 @@ const PaintCanvas = ({ height, width }: PaintCanvasType) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const contextRef = useRef<CanvasRenderingContext2D | null>(null);
   const [currentColor, setCurrentColor] = useState("#ff0000");
+
+  const [isDrawing, setIsDrawing] = useState(false);
+  const [lastCursorLocation, setLastCursorLocation] = useState<{
+    x: number;
+    y: number;
+  } | null>(null);
 
   const [shapeSelected, setShapeSelected] = useState("circle");
 
@@ -54,16 +61,74 @@ const PaintCanvas = ({ height, width }: PaintCanvasType) => {
     context.fill();
   };
 
+  const drawPencil = (event: React.MouseEvent) => {
+    const canvas = canvasRef.current;
+    const context = contextRef.current;
+    if (!canvas || !context) return;
+
+    const rect = canvas.getBoundingClientRect();
+
+    let y = event.clientY - rect.top;
+    let x = event.clientX - rect.left;
+
+    setIsDrawing(true);
+    setLastCursorLocation({ x, y });
+
+    if (isDrawing && lastCursorLocation) {
+      context.beginPath();
+      context.moveTo(lastCursorLocation?.x, lastCursorLocation?.y);
+      context.lineTo(x, y);
+      context.stroke();
+      setLastCursorLocation({ x, y });
+    }
+  };
+
   const draw = (event: React.MouseEvent) => {
     // Draw function mapper
     const drawFunctions = {
       circle: drawCircle,
       square: drawSquare,
+      pencil: drawPencil,
     };
 
     const drawFunction =
       drawFunctions[shapeSelected as keyof typeof drawFunctions];
-    drawFunction?.(event);
+
+    if (isDrawing) {
+      drawFunction?.(event);
+    }
+  };
+
+  const startDraw = (e: React.MouseEvent) => {
+    const canvas = canvasRef.current;
+    const context = contextRef.current;
+    if (!canvas || !context) return;
+
+    const rect = canvas.getBoundingClientRect();
+
+    let y = e.clientY - rect.top;
+    let x = e.clientX - rect.left;
+
+    setIsDrawing(true);
+    setLastCursorLocation({ x, y });
+
+    drawFunction(e);
+  };
+
+  const stopDraw = () => {
+    setIsDrawing(false);
+  };
+
+  const drawFunction = (e: React.MouseEvent) => {
+    const drawFunctions = {
+      circle: drawCircle,
+      square: drawSquare,
+      pencil: drawPencil,
+    };
+
+    const drawFunction =
+      drawFunctions[shapeSelected as keyof typeof drawFunctions];
+    drawFunction?.(e);
   };
 
   useEffect(() => {
@@ -94,13 +159,21 @@ const PaintCanvas = ({ height, width }: PaintCanvasType) => {
           selected={shapeSelected}
           shape="square"
         />
+        <PaintShapeSelector
+          srcImg={pencilShape}
+          setSelected={setShapeSelected}
+          selected={shapeSelected}
+          shape="pencil"
+        />
       </div>
       <div className="flex-flex-col">
         <canvas
           ref={canvasRef}
           width={width}
           height={height}
-          onMouseDown={(e) => draw(e)}
+          onMouseDown={(e) => startDraw(e)}
+          onMouseMove={(e) => draw(e)}
+          onMouseUp={stopDraw}
           className="hover:cursor-crosshair"
         />
         <PaintColorSelect setCurrentColor={setCurrentColor} />
