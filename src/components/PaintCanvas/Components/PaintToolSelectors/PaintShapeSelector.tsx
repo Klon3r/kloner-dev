@@ -27,15 +27,13 @@ const PaintShapeSelector = ({
   return (
     <div
       className={clsx(
-        "w-10 h-10",
-        highlighted ? "outline-2 outline-primary outline-offset-[-2px]" : ""
+        "w-10 h-10 hover:cursor-pointer",
+        highlighted
+          ? "outline-2 outline-black rounded-[8px] outline-offset-[-2px]"
+          : ""
       )}
     >
-      <img
-        src={srcImg}
-        className={"p-1 invert"}
-        onClick={() => onClickHandle()}
-      />
+      <img src={srcImg} className={"p-1"} onClick={() => onClickHandle()} />
     </div>
   );
 };

@@ -4,9 +4,13 @@ export const boxSize = 32;
 
 type PaintColorSelectType = {
   setCurrentColor: React.Dispatch<React.SetStateAction<string>>;
+  currentColor: string;
 };
 
-const PaintColorSelect = ({ setCurrentColor }: PaintColorSelectType) => {
+const PaintColorSelect = ({
+  setCurrentColor,
+  currentColor,
+}: PaintColorSelectType) => {
   const paintRowOne = [
     "black #000101",
     "dark-gray #91918e",
@@ -42,8 +46,8 @@ const PaintColorSelect = ({ setCurrentColor }: PaintColorSelectType) => {
   ];
 
   return (
-    <div className="flex flex-col">
-      <div className="flex flex-row">
+    <div className="flex flex-col py-1 gap-1">
+      <div className="flex flex-row justify-around">
         {paintRowOne.map((paintRowValue) => {
           const paintRowSplit = paintRowValue.split(" ");
           const name = paintRowSplit[0];
@@ -54,11 +58,12 @@ const PaintColorSelect = ({ setCurrentColor }: PaintColorSelectType) => {
               colorHex={hex}
               colorName={name}
               setCurrentColor={setCurrentColor}
+              currentColor={currentColor}
             />
           );
         })}
       </div>
-      <div className="flex flex-row">
+      <div className="flex flex-row justify-around">
         {paintRowTwo.map((paintRowValue) => {
           const paintRowSplit = paintRowValue.split(" ");
           const name = paintRowSplit[0];
@@ -69,6 +74,7 @@ const PaintColorSelect = ({ setCurrentColor }: PaintColorSelectType) => {
               colorHex={hex}
               colorName={name}
               setCurrentColor={setCurrentColor}
+              currentColor={currentColor}
             />
           );
         })}
