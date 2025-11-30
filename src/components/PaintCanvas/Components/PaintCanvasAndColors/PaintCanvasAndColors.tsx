@@ -7,6 +7,9 @@ type PaintCanvasAndColorsType = {
   height: number;
   setCurrentColor: React.Dispatch<SetStateAction<string>>;
   currentColor: string;
+  mouseDown: (event: React.MouseEvent<HTMLCanvasElement>) => void;
+  mouseUp: (event: React.MouseEvent<HTMLCanvasElement>) => void;
+  mouseMove: (event: React.MouseEvent<HTMLCanvasElement>) => void;
 };
 
 const PaintCanvasAndColors = ({
@@ -15,6 +18,9 @@ const PaintCanvasAndColors = ({
   height,
   setCurrentColor,
   currentColor,
+  mouseDown,
+  mouseUp,
+  mouseMove,
 }: PaintCanvasAndColorsType) => {
   return (
     <div>
@@ -23,6 +29,9 @@ const PaintCanvasAndColors = ({
         width={width}
         height={height}
         className="hover:cursor-crosshair rounded-2xl border-2 border-black"
+        onMouseDown={(e) => mouseDown(e)}
+        onMouseUp={(e) => mouseUp(e)}
+        onMouseMove={(e) => mouseMove(e)}
       />
       <PaintColorSelect
         setCurrentColor={setCurrentColor}
