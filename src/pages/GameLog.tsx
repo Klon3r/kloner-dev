@@ -1,6 +1,7 @@
 import GameCard from "@/components/GameCard/GameCard";
+import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const FETCH_URL =
   window.location.hostname === "localhost"
@@ -19,9 +20,39 @@ export type GameType = {
 const GameLog = () => {
   const [gameList, setGameList] = useState<GameType[]>([]);
   const [gameListLoading, setGameListLoading] = useState(true);
+  const [yearClicked, setYearClicked] = useState(false);
+  const [previousYearClicked, setPreviousYearClicked] = useState<number | null>(
+    null
+  );
 
-  const getDBList = async () => {
-    const response = await fetch(FETCH_URL, {
+  const currentYear = new Date().getFullYear();
+  const years = Array.from(
+    { length: currentYear - 2024 }, // Started the game log in 2025 (minus 2024 for the correct length)
+    (_, i) => currentYear - i
+  );
+
+  const handleYearLevelClick = (year: number) => {
+    // Don't resend API if the user clicks the same year as previous
+    if (year != previousYearClicked) {
+      resetGameListAndLoadingState();
+      getDBList(year).then((games) => setGameList(games));
+      setPreviousYearClicked(year);
+    }
+    setYearClicked(true);
+  };
+
+  const handleBackButtonClick = () => {
+    // Reset values
+    setYearClicked(false);
+  };
+
+  const resetGameListAndLoadingState = () => {
+    setGameListLoading(true);
+    setGameList([]);
+  };
+
+  const getDBList = async (year: number) => {
+    const response = await fetch(`${FETCH_URL}?year=${year}`, {
       method: "GET",
     });
     const data = await response.json();
@@ -35,25 +66,48 @@ const GameLog = () => {
     return games;
   };
 
-  useEffect(() => {
-    getDBList().then((games) => setGameList(games));
-  }, []);
-
   return (
-    <div>
-      <div className="flex flex-wrap flex-col items-center justify-center gap-10">
-        <h1 className="text-4xl underline underline-offset-5">
-          The Completion Hall
-        </h1>
-        {!gameListLoading ? (
-          <div className="flex flex-col items-center gap-5">
-            <GameCard gameList={gameList} />
-            <h1 className="text-xl">Total Games: {gameList.length}</h1>
-          </div>
-        ) : (
-          <GameListLoadingSkeleton />
-        )}
-      </div>
+    <div className="flex flex-col justify-center flex-wrap items-center gap-2">
+      <h1 className="text-3xl underline underline-offset-5">
+        The Completion Hall
+      </h1>
+      {/* Select a year */}
+      {!yearClicked &&
+        years.map((year) => {
+          return (
+            <Button
+              variant="link"
+              className="rounded-[5px] text-2xl"
+              key={year}
+              onClick={() => handleYearLevelClick(year)}
+            >
+              {year}
+            </Button>
+          );
+        })}
+
+      {/* Game List - Content */}
+      {yearClicked && (
+        <div className="flex flex-wrap flex-col items-center justify-center gap-10">
+          {!gameListLoading && gameList.length > 0 ? (
+            <div className="flex flex-col items-center gap-5">
+              <GameCard gameList={gameList} />
+              <h1 className="text-xl">Total Games: {gameList.length}</h1>
+            </div>
+          ) : gameListLoading ? (
+            <GameListLoadingSkeleton />
+          ) : (
+            <NoGamesFound />
+          )}
+          <Button
+            variant="link"
+            className="rounded-[5px] text-lg"
+            onClick={() => handleBackButtonClick()}
+          >
+            Back
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
@@ -66,6 +120,10 @@ const GameListLoadingSkeleton = () => {
       <Skeleton className="max-w-xs w-8 h-8 rounded-full" />
     </div>
   );
+};
+
+const NoGamesFound = () => {
+  return <div className="pt-3 text-lg">No games found</div>;
 };
 
 export default GameLog;
