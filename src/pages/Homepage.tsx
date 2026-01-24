@@ -25,11 +25,19 @@ const Homepage = () => {
     <div
       className={clsx(
         "flex gap-5 items-center mx-10 flex-wrap justify-center w-fit m-auto!",
-        isMobile ? "flex-col" : ""
+        isMobile ? "flex-col" : "",
       )}
       onMouseEnter={() => setIsDivHovered(true)}
       onMouseLeave={() => setIsDivHovered(false)}
     >
+      <ContentCard
+        title="Movie List"
+        description="My personal movie collection, Boycotting the revolving door of streaming, one disc at a time."
+        url="/movies"
+        isHovered={isDivHovered}
+        setIsHovered={setIsDivHovered}
+        newCard
+      />
       <ContentCard
         title="Terminal Klone"
         // cardImage={terminalImage}
@@ -37,7 +45,6 @@ const Homepage = () => {
         url="/terminal"
         isHovered={isDivHovered}
         setIsHovered={setIsDivHovered}
-        newCard
       />
       <ContentCard
         title="The Completion Hall"
@@ -45,6 +52,7 @@ const Homepage = () => {
         description="My personal gaming log with completion dates, platforms, and notes"
         url="/games"
         isHovered={isDivHovered}
+        setIsHovered={setIsDivHovered}
       />
       <ContentCard
         title="Countdown"
@@ -52,6 +60,7 @@ const Homepage = () => {
         description="Start a countdown and get notified the moment it finishes"
         url="/timer"
         isHovered={isDivHovered}
+        setIsHovered={setIsDivHovered}
       />
     </div>
   );
