@@ -4,8 +4,8 @@ const ALLOWED_ORIGIN =
   process.env.NODE_ENV === "production" ? "https://kloner.dev/" : "*";
 
 const client = createClient({
-  url: process.env.TURSO_DATABASE_URL ?? "",
-  authToken: process.env.TURSO_AUTH_TOKEN,
+  url: process.env.KLONER_TURSO_DATABASE_URL ?? "",
+  authToken: process.env.KLONER_TURSO_AUTH_TOKEN,
 });
 
 /**
@@ -24,7 +24,7 @@ export const GET = async (request: Request) => {
           "Content-Type": "application/json",
           "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
         },
-      }
+      },
     );
   }
 
