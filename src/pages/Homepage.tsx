@@ -31,7 +31,7 @@ const Homepage = () => {
       onMouseLeave={() => setIsDivHovered(false)}
     >
       <ContentCard
-        title="Movie List"
+        title="The Disc Archive"
         description="My personal movie collection, Boycotting the revolving door of streaming, one disc at a time."
         url="/movies"
         isHovered={isDivHovered}

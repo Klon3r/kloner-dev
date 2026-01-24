@@ -1,7 +1,12 @@
 import { test, expect } from "@playwright/test";
 
-const cardTitles = ["Countdown", "The Completion Hall", "Terminal Klone"];
-const cardUrl = ["timer", "games", "terminal"];
+const cardTitles = [
+  "Countdown",
+  "The Completion Hall",
+  "Terminal Klone",
+  "The Disc Archive",
+];
+const cardUrl = ["timer", "games", "terminal", "movies"];
 
 const newCard = cardTitles[cardTitles.length - 1];
 
