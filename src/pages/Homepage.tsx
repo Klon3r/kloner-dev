@@ -32,7 +32,7 @@ const Homepage = () => {
     >
       <ContentCard
         title="The Disc Archive"
-        description="My personal movie collection, Boycotting the revolving door of streaming, one disc at a time."
+        description="My personal movie collection, Boycotting streaming, one disc at a time."
         url="/movies"
         isHovered={isDivHovered}
         setIsHovered={setIsDivHovered}
