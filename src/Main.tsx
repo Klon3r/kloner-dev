@@ -9,6 +9,7 @@ import HeaderBar from "./components/HeaderBar/HeaderBar";
 import GameLog from "./pages/GameLog";
 import TerminalKlone from "./pages/TerminalKlone";
 import Paint from "./pages/Paint";
+import MovieLog from "./pages/MovieLog";
 
 const router = createBrowserRouter([
   {
@@ -18,6 +19,16 @@ const router = createBrowserRouter([
       <>
         <HeaderBar />
         <Homepage />
+      </>
+    ),
+  },
+  // Movies
+  {
+    path: "/movies",
+    element: (
+      <>
+        <HeaderBar />
+        <MovieLog />
       </>
     ),
   },
@@ -76,5 +87,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <div className="font-mono">
     <RouterProvider router={router} />
-  </div>
+  </div>,
 );
