@@ -1,6 +1,8 @@
 // import { useState } from "react";
 
+import MovieListSearchBar from "@/components/SearchBar/MovieSearchBar";
 import { Spinner } from "@/components/ui/spinner";
+import { toSearchFormat } from "@/utils/search";
 import { useEffect, useState } from "react";
 
 const FETCH_URL =
@@ -8,15 +10,16 @@ const FETCH_URL =
     ? "http://localhost:3000/api/movies"
     : "/api/movies";
 
-type MovieType = {
+export type MovieType = {
   movie_id: number;
   movie_title: string;
+  search_title?: string;
 };
 
 const MovieLog = () => {
-  const [movieList, setMovieList] = useState<MovieType[]>([]);
+  const [allMovies, setAllMovies] = useState<MovieType[]>([]);
+  const [displayedMovies, setDisplayedMovies] = useState<MovieType[]>([]);
   const [isMovieListLoading, setIsMovieListLoading] = useState(true);
-  const movieTotal = movieList.length;
 
   const getMovieList = async () => {
     const response = await fetch(FETCH_URL, { method: "GET" });
@@ -32,7 +35,16 @@ const MovieLog = () => {
   };
 
   useEffect(() => {
-    getMovieList().then((movies) => setMovieList(movies));
+    getMovieList().then((movies) => {
+      // Add search title to help with movie searching, removes punctuation syntax
+      const searchFormat = movies.map((movie: MovieType) => ({
+        ...movie,
+        search_title: toSearchFormat(movie.movie_title),
+      }));
+
+      setAllMovies(searchFormat);
+      setDisplayedMovies(searchFormat);
+    });
   }, []);
 
   return (
@@ -43,15 +55,21 @@ const MovieLog = () => {
         <Spinner className="size-10 mt-5" />
       ) : (
         <div className="flex flex-col justify-center items-center">
-          {!isMovieListLoading && movieTotal > 0 && (
-            <h2 className="text-primary text-xl mb-5">
-              Total DVDs: {movieTotal}
-            </h2>
+          {!isMovieListLoading && (
+            <div>
+              <MovieListSearchBar
+                className="py-3"
+                allMovies={allMovies}
+                setDisplayedMovieList={setDisplayedMovies}
+                totalResults={displayedMovies.length}
+              />
+            </div>
           )}
           <table>
-            {!isMovieListLoading && movieTotal > 0 ? (
+            {/* {!isMovieListLoading && movieTotal > 0 ? ( */}
+            {!isMovieListLoading ? (
               <tbody>
-                {movieList.map((movie) => (
+                {displayedMovies.map((movie) => (
                   <tr key={movie.movie_id}>
                     <td className="border-b-2 text-xl p-2 hover:text-primary">
                       {movie.movie_title}
